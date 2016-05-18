@@ -24,34 +24,34 @@ void setup() {
   font = loadFont("try1.vlw");
   textFont(font);
   noStroke();
-  
+
   //if (state=="") {
-    size(400, 400);
-    background(250, 249, 237);
+  size(400, 400);
+  background(250, 249, 237);
 
-    //0.
-    r(100, 40, 200, 50, 13, color(100));
-    dt("Calculator", 113, 55, 170, 100, color(225), 30, CENTER);
+  //0.
+  r(100, 40, 200, 50, 13, color(100));
+  dt("Calculator", 113, 55, 170, 100, color(225), 30, CENTER);
 
-    //1.
-    r(250, 100, 100, 40, 13, color(100));
-    dt("Basic", 250, 113, 100, 100, color(225), 22, CENTER);
+  //1.
+  r(250, 100, 100, 40, 13, color(100));
+  dt("Basic", 250, 113, 100, 100, color(225), 22, CENTER);
 
-    //2.
-    r(250, 150, 100, 40, 10, color(100));
-    dt("Calculus", 250, 163, 100, 100, color(225), 22, CENTER);
+  //2.
+  r(250, 150, 100, 40, 10, color(100));
+  dt("Calculus", 250, 163, 100, 100, color(225), 22, CENTER);
 
-    //3.
-    r(250, 200, 100, 40, 10, color(100));
-    dt("Statistics", 250, 213, 100, 100, color(225), 22, CENTER);
+  //3.
+  r(250, 200, 100, 40, 10, color(100));
+  dt("Statistics", 250, 213, 100, 100, color(225), 22, CENTER);
 
-    //4.
-    r(250, 250, 100, 40, 10, color(100));
-    dt("Graph", 250, 263, 100, 100, color(225), 22, CENTER);
+  //4.
+  r(250, 250, 100, 40, 10, color(100));
+  dt("Graph", 250, 263, 100, 100, color(225), 22, CENTER);
 
-    //5.
-    r(250, 300, 100, 40, 10, color(100));
-    dt("Matrices", 250, 313, 100, 100, color(225), 21, CENTER);
+  //5.
+  r(250, 300, 100, 40, 10, color(100));
+  dt("Matrices", 250, 313, 100, 100, color(225), 21, CENTER);
   //}  
 
   if (state == "b") {
@@ -172,6 +172,9 @@ public static double evaluate(String s) {
     i=parts.indexOf("!");
     while (i!=-1) {
       int x=1;
+      if (parts.get(i-1).length()>2&&parts.get(i-1).substring(parts.get(i-1).length()-2).equals(".0")) {
+        parts.set(i-1, parts.get(i-1).substring(0, parts.get(i-1).length()-2));
+      }
       int n=Integer.parseInt(parts.get(i-1));
       for (int j=n; j>1; j--) {
         x*=j;
@@ -182,6 +185,12 @@ public static double evaluate(String s) {
     }
     i=parts.indexOf("%");
     while (i!=-1) {
+      if (parts.get(i-1).length()>2&&parts.get(i-1).substring(parts.get(i-1).length()-2).equals(".0")) {
+        parts.set(i-1, parts.get(i-1).substring(0, parts.get(i-1).length()-2));
+      }
+      if (parts.get(i+1).length()>2&&parts.get(i+1).substring(parts.get(i+1).length()-2).equals(".0")) {
+        parts.set(i+1, parts.get(i+1).substring(0, parts.get(i+1).length()-2));
+      }
       int x=Integer.parseInt(parts.get(i-1))%Integer.parseInt(parts.get(i+1));
       parts.set(i, ""+x);
       parts.remove(i+1);
