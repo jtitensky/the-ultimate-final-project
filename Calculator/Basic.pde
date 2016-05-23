@@ -19,10 +19,8 @@ class Basic {
   }
 
   String result() {
-    String s;
     try {
-      s=""+evaluate(written);
-      return s;
+      return ""+evaluate(written);
     }
     catch(IllegalArgumentException e) {
       return "this expression is invalid";
@@ -32,6 +30,9 @@ class Basic {
     }
   }
 
+  boolean valid(char c) {
+    return c=='1'||c=='2'||c=='3'||c=='4'||c=='5'||c=='6'||c=='7'||c=='8'||c=='9'||c=='0'||c=='+'||c=='-'||c=='*'||c=='/'||c=='!'||c=='%'||c=='('||c==')'||c=='^';
+  }
 
   void write() {
     System.out.println(key);
@@ -48,7 +49,7 @@ class Basic {
       } else {
         if (key==BACKSPACE && written.length()>0) {
           written=written.substring(0, written.length()-1);
-        } else {
+        } else if (valid(key) && written.length()<16) {
           written+=key;
         }
         r(100, 180, 400, 50, 5, color(185, 191, 235));
