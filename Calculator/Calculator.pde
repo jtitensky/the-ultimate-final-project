@@ -9,6 +9,8 @@ Basic b1=new Basic();
 boolean writing=false;
 String written="";
 
+Calculus c1=new Calculus();
+
 void r(float x, float y, float w, float h, float r, color c) {
   fill(c);
   rect(x, y, w, h, r);
@@ -60,22 +62,9 @@ void setup() {
 
   if (state == 'b') {
     b1.create();
-    //setupB();
-    /*
-    size(400, 400);
-     background(0);
-     r(50, 30, 100, 40, 10, color(100));
-     dt("Back", 50, 40, 100, 100, color(225), 25, CENTER);
-     
-     cp5 = new ControlP5(this);
-     cp5.addTextfield("Type an expression you would like to evaluated...")
-     .setPosition(50, 100)
-     .setSize(200, 40)
-     .setFont(font)
-     .setFocus(false)      
-     .setColor(color(105, 204, 100))
-     ;
-     */
+  }
+  if (state=='c') {
+    c1.blah();
   }
 }
 
@@ -122,9 +111,9 @@ void thingsHappening() {
         state = 'm'; //matrices
       }
     }
-    if (state == 'b') {
-      setup();
-    }  
+
+    setup();
+
     //}
   }
 }

@@ -14,6 +14,7 @@ Development Log
 5-16 H: implement evaluate function and now "basic" property works :)\
 5-22 J: made the input thingy for basic and wrote definite integral and derivative functions
 
+
 Project Plan
 ~~~~~~~~~~~~
 
