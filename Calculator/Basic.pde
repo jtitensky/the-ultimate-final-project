@@ -88,6 +88,11 @@ class Basic {
     if (!st.empty()) {
       throw new IllegalArgumentException();
     }
+    /*
+    for (int o = 0; o < where.size(); o++) {
+      println(where.get(o));
+    }
+    */
     //all ()s r legit
     for (int i=0; i<where.size(); i+=2) {
       String t=""+evaluate(s.substring(where.get(i)+1, where.get(i+1)));

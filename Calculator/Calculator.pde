@@ -5,11 +5,10 @@ import java.io.*;
 //ControlP5 cp5;
 //public class Calculator {
 
-Basic b1=new Basic();
+Basic b1= new Basic();
+Graph g1 = new Graph();
 boolean writing=false;
 String written="";
-
-Calculus c1=new Calculus();
 
 void r(float x, float y, float w, float h, float r, color c) {
   fill(c);
@@ -29,7 +28,9 @@ String eval = "";
 void setup() {
   font = loadFont("try1.vlw");
   textFont(font);
-  noStroke();
+  //noStroke();
+
+  point(100, 200);
 
   //if (state=="") {
   size(600, 600);
@@ -63,8 +64,8 @@ void setup() {
   if (state == 'b') {
     b1.create();
   }
-  if (state=='c') {
-    c1.blah();
+  if (state == 'g') {
+    g1.create();
   }
 }
 
@@ -78,13 +79,21 @@ void draw() {
 void mouseClicked() {
   if (state=='b' && b1.mouseOnBox()) {
     r(100, 180, 400, 50, 5, color(185, 191, 235));
-    writing=true;
+    writing = true;
+  }
+  if (state == 'g') {
+    g1.create();
+    g1.mClick();
+    writing = true;
   }
 }
 
 void keyReleased() {
   if (state=='b') {
     b1.write();
+  }
+  if (state=='g') {
+    g1.write();
   }
 }
 
@@ -111,26 +120,9 @@ void thingsHappening() {
         state = 'm'; //matrices
       }
     }
-
-    setup();
-
+    if (state == 'b' || state == 'c' || state == 's' || state == 'g' || state == 'm') {
+      setup();
+    }
     //}
   }
 }
-/*
-void controlEvent(ControlEvent theEvent) {
- if (theEvent.isAssignableFrom(Textfield.class)) {
- eval =  theEvent.getStringValue();
- if (eval!="") {
- println(eval);
- println(evaluate(eval));
- r(50, 200, 200, 200, color(0), 10);
- dt(evaluate(eval)+"", 100, 230, 170, 100, color(225), 60, CENTER);
- }
- }
- }
- */
-
-
-
-//}
