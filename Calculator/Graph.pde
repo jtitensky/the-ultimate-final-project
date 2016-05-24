@@ -148,7 +148,7 @@ class Graph {
     }
   }
 
-  boolean op(char f){
+  boolean op(char f) {
     return f=='+' || f=='-'||f=='*'||f=='/'||f=='^';
   }
 
@@ -162,8 +162,8 @@ class Graph {
         g += "(" + i + ")";
         // }
       } else {
-        if(op(s.charAt(j))){
-          j++; 
+        if (op(s.charAt(j))) {
+          j++;
         }
         g += s.charAt(j);
       }

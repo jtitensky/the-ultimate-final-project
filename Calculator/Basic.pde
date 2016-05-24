@@ -31,11 +31,11 @@ class Basic {
   }
 
   boolean valid(char c) {
-    return c=='1'||c=='2'||c=='3'||c=='4'||c=='5'||c=='6'||c=='7'||c=='8'||c=='9'||c=='0'||c=='+'||c=='-'||c=='*'||c=='/'||c=='!'||c=='%'||c=='('||c==')'||c=='^';
+    return c=='1'||c=='2'||c=='3'||c=='4'||c=='5'||c=='6'||c=='7'||c=='8'||c=='9'||c=='0'||c=='+'||c=='-'||c=='*'||c=='/'||c=='!'||c=='%'||c=='('||c==')'||c=='^'||c=='.'||(96<c&&c<123);
   }
 
   void write() {
-    System.out.println(key);
+    //System.out.println(key);
     if (writing) {
       if (key==ENTER || key==RETURN) {
         create();
@@ -63,7 +63,7 @@ class Basic {
       //System.out.println(key=='?');
       //System.out.println(keyPressed);
       if (written.length()>0 && written.substring(written.length()-1).equals("?")) {
-        System.out.println("now");
+        //System.out.println("now");
         written=written.substring(0, written.length()-1);
       }
     }
@@ -71,6 +71,39 @@ class Basic {
 
 
   double evaluate(String s) {
+    s=s.replace("e", ""+Math.E);
+    s=s.replace("pi", ""+Math.PI);
+    boolean radian=true;
+    while (s.contains("arcsin")) {
+      s=evalF(s, "arcsin", radian);
+    }
+    while (s.contains("arccos")) {
+      s=evalF(s, "arccos", radian);
+    }
+    while (s.contains("arctan")) {
+      s=evalF(s, "acrtan", radian);
+    }
+    while (s.contains("sin")) {
+      s=evalF(s, "sin", radian);
+    }
+    System.out.println("s "+s);
+    while (s.contains("cos")) {
+      s=evalF(s, "cos", radian);
+    }
+    while (s.contains("tan")) {
+      s=evalF(s, "tan", radian);
+    }
+    while (s.contains("log")) {
+      s=evalF(s, "log", radian);
+    }
+    while (s.contains("ln")) {
+      s=evalF(s, "ln", radian);
+    }
+    while (s.contains("abs")) {
+      s=evalF(s, "abs", radian);
+    }
+
+
     Stack<Integer> st=new Stack<Integer>();
     ArrayList<Integer> where=new ArrayList<Integer>();
     for (int i=0; i<s.length(); i++) {
@@ -90,10 +123,11 @@ class Basic {
     }
     /*
     for (int o = 0; o < where.size(); o++) {
-      println(where.get(o));
-    }
-    */
+     println(where.get(o));
+     }
+     */
     //all ()s r legit
+
     for (int i=0; i<where.size(); i+=2) {
       String t=""+evaluate(s.substring(where.get(i)+1, where.get(i+1)));
       s=s.substring(0, where.get(i))+t+s.substring(where.get(i+1)+1);
@@ -156,7 +190,12 @@ class Basic {
       }
       i=parts.indexOf("^");
       while (i!=-1) {
-        double x=Math.pow(Double.parseDouble(parts.get(i-1)), Double.parseDouble(parts.get(i+1)));
+        double x;
+        if (i-2>=0&&parts.get(i-2).equals("-")) {
+          x=Math.pow(Double.parseDouble(parts.get(i-1))*(-1), Double.parseDouble(parts.get(i+1)));
+        } else {
+          x=Math.pow(Double.parseDouble(parts.get(i-1)), Double.parseDouble(parts.get(i+1)));
+        }
         parts.set(i, ""+x);
         parts.remove(i+1);
         parts.remove(i-1);
@@ -205,5 +244,74 @@ class Basic {
       return -1*Double.parseDouble(parts.get(1));
     }
     throw new UnsupportedOperationException();
+  }
+
+  String evalF(String s, String f, boolean r) {
+    int i=s.indexOf(f+"(");
+    int c=1;
+    int j=i+f.length();
+    if (i!=-1) {
+      while (c!=0) {
+        j++;
+        if (s.charAt(j)=='(') {
+          c++;
+        }
+        if (s.charAt(j)==')') {
+          c--;
+        }
+      }
+      double x=evaluate(s.substring(i+f.length()+1, j));
+      if (f.equals("sin")) {
+        if (!r) {
+          x=Math.toRadians(x);
+        }
+        if (Math.sin(x)<.0000000001) {
+          s=s.substring(0, i)+"0"+s.substring(j+1);
+        } else {
+          s=s.substring(0, i)+Math.sin(x)+s.substring(j+1);
+        }
+        System.out.println("x "+s);
+      }
+      if (f.equals("cos")) {
+        if (!r) {
+          x=Math.toRadians(x);
+        }
+        if (Math.cos(x)<.0000000001) {
+          s=s.substring(0, i)+"0"+s.substring(j+1);
+        } else {
+          s=s.substring(0, i)+Math.cos(x)+s.substring(j+1);
+        }
+      }
+      if (f.equals("tan")) {
+        if (!r) {
+          x=Math.toRadians(x);
+        }
+        if (Math.tan(x)<.0000000001) {
+          s=s.substring(0, i)+"0"+s.substring(j+1);
+        } else {
+          s=s.substring(0, i)+Math.tan(x)+s.substring(j+1);
+        }
+      }
+      if (f.equals("arcsin")) {
+        s=s.substring(0, i)+Math.asin(x)+s.substring(j+1);
+      }
+      if (f.equals("arccos")) {
+        s=s.substring(0, i)+Math.acos(x)+s.substring(j+1);
+      }
+      if (f.equals("arctan")) {
+        s=s.substring(0, i)+Math.atan(x)+s.substring(j+1);
+      }
+      if (f.equals("log")) {
+        s=s.substring(0, i)+Math.log10(x)+s.substring(j+1);
+      }
+      if (f.equals("ln")) {
+        s=s.substring(0, i)+Math.log(x)+s.substring(j+1);
+      }
+      if (f.equals("abs")) {
+        s=s.substring(0, i)+Math.abs(x)+s.substring(j+1);
+      }
+    }
+    System.out.println("b "+s+f);
+    return s;
   }
 }

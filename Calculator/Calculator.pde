@@ -6,6 +6,7 @@ import java.io.*;
 //public class Calculator {
 
 Basic b1= new Basic();
+Calculus c1=new Calculus();
 Graph g1 = new Graph();
 boolean writing=false;
 String written="";
@@ -66,6 +67,9 @@ void setup() {
   }
   if (state == 'g') {
     g1.create();
+  }
+  if (state=='c') {
+    //c1.create();
   }
 }
 
