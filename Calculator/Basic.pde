@@ -193,12 +193,16 @@ class Basic {
         double x;
         if (i-2>=0&&parts.get(i-2).equals("-")) {
           x=Math.pow(Double.parseDouble(parts.get(i-1))*(-1), Double.parseDouble(parts.get(i+1)));
+          parts.set(i, ""+x);
+          parts.remove(i+1);
+          parts.remove(i-2);
+          parts.remove(i-2);
         } else {
           x=Math.pow(Double.parseDouble(parts.get(i-1)), Double.parseDouble(parts.get(i+1)));
+          parts.set(i, ""+x);
+          parts.remove(i+1);
+          parts.remove(i-1);
         }
-        parts.set(i, ""+x);
-        parts.remove(i+1);
-        parts.remove(i-1);
         i=parts.indexOf("^");
       }
       i=parts.indexOf("/");
