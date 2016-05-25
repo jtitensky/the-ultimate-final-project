@@ -71,6 +71,7 @@ class Basic {
 
 
   double evaluate(String s) {
+    s=s.replace("--", "+");
     s=s.replace("e", ""+Math.E);
     s=s.replace("pi", ""+Math.PI);
     boolean radian=true;
@@ -86,7 +87,6 @@ class Basic {
     while (s.contains("sin")) {
       s=evalF(s, "sin", radian);
     }
-    System.out.println("s "+s);
     while (s.contains("cos")) {
       s=evalF(s, "cos", radian);
     }
@@ -158,6 +158,14 @@ class Basic {
       parts.remove(parts.size()-1);
     }
     //broken up
+    for (int i=0; i<parts.size()-1; i++) {
+      if (parts.get(i).equals("-")&&parts.get(i+1).equals("-")) {
+        parts.set(i, "+");
+        parts.remove(i+1);
+        i--;
+      }
+    }
+    System.out.println(parts);
     try {
       int i;
       i=parts.indexOf("!");
