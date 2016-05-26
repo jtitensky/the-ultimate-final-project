@@ -69,7 +69,7 @@ void setup() {
     g1.create();
   }
   if (state=='c') {
-    //c1.create();
+    c1.create();
   }
 }
 

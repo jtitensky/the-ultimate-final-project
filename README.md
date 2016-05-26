@@ -15,6 +15,8 @@ Development Log
 5-22 J: made the input thingy for basic and wrote definite integral and derivative functions
 5-23 H: created input for graph, created graph funtion for normal y= functions (major bug/problem with properly getting input - screwey and unusable input at times when operations are used), implemented the very basics for graphing
 5-23 J: fixed a small thing in evaluate, and also made it work for e, pi, (arc)sin, (arc)cos, (arc)tan, log, ln, and abs
+5-24 J: fixed stuff in evaluate for hopefully the last time
+5-25 J: made differentiate be for nth derivatives, and started matrix functions
 
 Project Plan
 

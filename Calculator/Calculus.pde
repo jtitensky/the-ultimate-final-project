@@ -14,6 +14,9 @@ public class Calculus {
     textAlign(CENTER);
     text("∫", 300, 150);
     r(100, 180, 400, 50, 5, color(91, 108, 235));
+    for (int i=1; i<9; i++) {
+      System.out.println("d "+i+differentiate('x', "e^x", 1.0, i));
+    }
   }
 
 
@@ -37,26 +40,30 @@ public class Calculus {
     return s*(b-a)/1000000;
   }
 
-  double differentiate(char d, String e, double a) {
+  double differentiate(char d, String e, double a, int n) {
     String y="";
     double s;
-    for (int i=0; i<e.length(); i++) {
-      if (e.charAt(i)==d) {
-        y+=a+.000001;
-      } else {
-        y+=e.charAt(i);
+    if (n==1) {
+      for (int i=0; i<e.length(); i++) {
+        if (e.charAt(i)==d) {
+          y+=a+.000001;
+        } else {
+          y+=e.charAt(i);
+        }
       }
-    }
-    s=b2.evaluate(y);
-    y="";
-    for (int i=0; i<e.length(); i++) {
-      if (e.charAt(i)==d) {
-        y+=a-.000001;
-      } else {
-        y+=e.charAt(i);
+      s=b2.evaluate(y);
+      y="";
+      for (int i=0; i<e.length(); i++) {
+        if (e.charAt(i)==d) {
+          y+=a-.000001;
+        } else {
+          y+=e.charAt(i);
+        }
       }
+      s-=b2.evaluate(y);
+      return s/.000002;
+    } else {
+      return (differentiate(d, e, a+.1, n-1)-differentiate(d, e, a-.1, n-1))/2/.1;
     }
-    s-=b2.evaluate(y);
-    return s/.000002;
   }
 }
