@@ -49,7 +49,7 @@ class Basic {
       } else {
         if (key==BACKSPACE && written.length()>0) {
           written=written.substring(0, written.length()-1);
-        } else if (valid(key) && written.length()<16) {
+        } else if (valid(key) ) {//&& written.length()<16) {
           written+=key;
         }
         r(100, 180, 400, 50, 5, color(185, 191, 235));
@@ -71,7 +71,13 @@ class Basic {
 
 
   double evaluate(String s) {
+        s=s.replace("e", ""+Math.E);
+    s=s.replace("pi", ""+Math.PI);
     s=s.replace("--", "+");
+    s=s.replace("+-", "-");
+    System.out.println(s);
+    s=s.replace("*-", "*-1*");
+    System.out.println(s);
     s=s.replace("e", ""+Math.E);
     s=s.replace("pi", ""+Math.PI);
     boolean radian=true;
@@ -158,10 +164,16 @@ class Basic {
       parts.remove(parts.size()-1);
     }
     //broken up
+    System.out.println("1 "+parts);
     for (int i=0; i<parts.size()-1; i++) {
       if (parts.get(i).equals("-")&&parts.get(i+1).equals("-")) {
         parts.set(i, "+");
         parts.remove(i+1);
+        i--;
+      }
+      if (parts.get(i).equals("-")&&47<parts.get(i+1).charAt(0)&&parts.get(i+1).charAt(0)<58) {
+        parts.set(i+1, ""+Double.parseDouble(parts.get(i+1))*-1);
+        parts.remove(i);
         i--;
       }
     }
@@ -273,11 +285,12 @@ class Basic {
         }
       }
       double x=evaluate(s.substring(i+f.length()+1, j));
+      System.out.println("i "+x);
       if (f.equals("sin")) {
         if (!r) {
           x=Math.toRadians(x);
         }
-        if (Math.sin(x)<.0000000001) {
+        if (Math.sin(x)<.0000000001&&Math.sin(x)>-.0000000001) {
           s=s.substring(0, i)+"0"+s.substring(j+1);
         } else {
           s=s.substring(0, i)+Math.sin(x)+s.substring(j+1);

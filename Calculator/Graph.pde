@@ -99,7 +99,7 @@ class Graph {
         if (key==BACKSPACE && written[cWritten].length()>0) {
           written[cWritten]=written[cWritten].substring(0, written[cWritten].length()-1);
           r(40, 180+40*cWritten, 300, 30, 5, color(185, 191, 235));
-        } else if (written[cWritten].length()<16) {
+        } else if (written[cWritten].length()<16 && b2.valid(key)) {
           written[cWritten]+=key;
         }
         textSize(22);
@@ -117,6 +117,9 @@ class Graph {
       }
     }
   }
+
+
+
 
   void graphh() {
 
@@ -162,9 +165,7 @@ class Graph {
         g += "(" + i + ")";
         // }
       } else {
-        if (op(s.charAt(j))) {
-          j++;
-        }
+
         g += s.charAt(j);
       }
     }
