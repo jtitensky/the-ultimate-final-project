@@ -71,12 +71,14 @@ class Basic {
 
 
   double evaluate(String s) {
+    System.out.println(s);
     s=s.replace("e", ""+Math.E);
     s=s.replace("pi", ""+Math.PI);
     s=s.replace("--", "+");
     s=s.replace("+-", "-");
     System.out.println(s);
     s=s.replace("*-", "*-1*");
+    s=s.replace("/-", "*-1/");
     System.out.println(s);
     s=s.replace("e", ""+Math.E);
     s=s.replace("pi", ""+Math.PI);
@@ -173,7 +175,11 @@ class Basic {
       }
       if (parts.get(i).equals("-")&&47<parts.get(i+1).charAt(0)&&parts.get(i+1).charAt(0)<58) {
         parts.set(i+1, ""+Double.parseDouble(parts.get(i+1))*-1);
-        parts.remove(i);
+        if (i>0&&47<parts.get(i-1).charAt(0)&&parts.get(i-1).charAt(0)<58) {
+          parts.set(i, "+");
+        } else {
+          parts.remove(i);
+        }
         i--;
       }
     }
@@ -261,6 +267,7 @@ class Basic {
     catch(Exception e) {
       throw new IllegalArgumentException();
     }
+    System.out.println("SAFSAF"+parts);
     if (parts.size()==1) {
       return Double.parseDouble(parts.get(0));
     }
