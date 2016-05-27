@@ -17,6 +17,7 @@ Development Log
 5-23 J: fixed a small thing in evaluate, and also made it work for e, pi, (arc)sin, (arc)cos, (arc)tan, log, ln, and abs
 5-24 J: fixed stuff in evaluate for hopefully the last time
 5-25 J: made differentiate be for nth derivatives, and started matrix functions
+5-26 J: fixed graph input problem and did more matrix functions
 
 Project Plan
 

@@ -71,7 +71,7 @@ class Basic {
 
 
   double evaluate(String s) {
-        s=s.replace("e", ""+Math.E);
+    s=s.replace("e", ""+Math.E);
     s=s.replace("pi", ""+Math.PI);
     s=s.replace("--", "+");
     s=s.replace("+-", "-");
@@ -301,7 +301,7 @@ class Basic {
         if (!r) {
           x=Math.toRadians(x);
         }
-        if (Math.cos(x)<.0000000001) {
+        if (Math.cos(x)<.0000000001&&Math.cos(x)>-.0000000001) {
           s=s.substring(0, i)+"0"+s.substring(j+1);
         } else {
           s=s.substring(0, i)+Math.cos(x)+s.substring(j+1);
@@ -311,7 +311,7 @@ class Basic {
         if (!r) {
           x=Math.toRadians(x);
         }
-        if (Math.tan(x)<.0000000001) {
+        if (Math.tan(x)<.0000000001&&Math.tan(x)>-.0000000001) {
           s=s.substring(0, i)+"0"+s.substring(j+1);
         } else {
           s=s.substring(0, i)+Math.tan(x)+s.substring(j+1);

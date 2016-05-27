@@ -8,6 +8,7 @@ import java.io.*;
 Basic b1= new Basic();
 Calculus c1=new Calculus();
 Graph g1 = new Graph();
+Matricies m1=new Matricies();
 boolean writing=false;
 String written="";
 
@@ -70,6 +71,9 @@ void setup() {
   }
   if (state=='c') {
     c1.create();
+  }
+  if (state=='m') {
+    m1.create();
   }
 }
 
