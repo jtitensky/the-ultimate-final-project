@@ -93,7 +93,9 @@ class Basic {
       s=evalF(s, "acrtan", radian);
     }
     while (s.contains("sin")) {
+      System.out.println("SS "+s);
       s=evalF(s, "sin", radian);
+      System.out.println("SSS "+s);
     }
     while (s.contains("cos")) {
       s=evalF(s, "cos", radian);
@@ -137,7 +139,10 @@ class Basic {
     //all ()s r legit
 
     for (int i=0; i<where.size(); i+=2) {
-      String t=""+evaluate(s.substring(where.get(i)+1, where.get(i+1)));
+      //String t=""+evaluate(s.substring(where.get(i)+1, where.get(i+1)));
+      DecimalFormat df=new DecimalFormat("#");
+      df.setMaximumFractionDigits(10);
+      String t=""+df.format(evaluate(s.substring(where.get(i)+1, where.get(i+1))));
       s=s.substring(0, where.get(i))+t+s.substring(where.get(i+1)+1);
       for (int j=i+2; j<where.size(); j++) {
         if (where.get(j)>where.get(i+1)) {
@@ -267,7 +272,6 @@ class Basic {
     catch(Exception e) {
       throw new IllegalArgumentException();
     }
-    System.out.println("SAFSAF"+parts);
     if (parts.size()==1) {
       return Double.parseDouble(parts.get(0));
     }
@@ -292,7 +296,8 @@ class Basic {
         }
       }
       double x=evaluate(s.substring(i+f.length()+1, j));
-      System.out.println("i "+x);
+      DecimalFormat df=new DecimalFormat("#");
+      df.setMaximumFractionDigits(10);
       if (f.equals("sin")) {
         if (!r) {
           x=Math.toRadians(x);
@@ -300,9 +305,8 @@ class Basic {
         if (Math.sin(x)<.0000000001&&Math.sin(x)>-.0000000001) {
           s=s.substring(0, i)+"0"+s.substring(j+1);
         } else {
-          s=s.substring(0, i)+Math.sin(x)+s.substring(j+1);
+          s=s.substring(0, i)+df.format(Math.sin(x))+s.substring(j+1);
         }
-        System.out.println("x "+s);
       }
       if (f.equals("cos")) {
         if (!r) {
@@ -311,7 +315,7 @@ class Basic {
         if (Math.cos(x)<.0000000001&&Math.cos(x)>-.0000000001) {
           s=s.substring(0, i)+"0"+s.substring(j+1);
         } else {
-          s=s.substring(0, i)+Math.cos(x)+s.substring(j+1);
+          s=s.substring(0, i)+df.format(Math.cos(x))+s.substring(j+1);
         }
       }
       if (f.equals("tan")) {
@@ -321,29 +325,28 @@ class Basic {
         if (Math.tan(x)<.0000000001&&Math.tan(x)>-.0000000001) {
           s=s.substring(0, i)+"0"+s.substring(j+1);
         } else {
-          s=s.substring(0, i)+Math.tan(x)+s.substring(j+1);
+          s=s.substring(0, i)+df.format(Math.tan(x))+s.substring(j+1);
         }
       }
       if (f.equals("arcsin")) {
-        s=s.substring(0, i)+Math.asin(x)+s.substring(j+1);
+        s=s.substring(0, i)+df.format(Math.asin(x))+s.substring(j+1);
       }
       if (f.equals("arccos")) {
-        s=s.substring(0, i)+Math.acos(x)+s.substring(j+1);
+        s=s.substring(0, i)+df.format(Math.acos(x))+s.substring(j+1);
       }
       if (f.equals("arctan")) {
-        s=s.substring(0, i)+Math.atan(x)+s.substring(j+1);
+        s=s.substring(0, i)+df.format(Math.atan(x))+s.substring(j+1);
       }
       if (f.equals("log")) {
-        s=s.substring(0, i)+Math.log10(x)+s.substring(j+1);
+        s=s.substring(0, i)+df.format(Math.log10(x))+s.substring(j+1);
       }
       if (f.equals("ln")) {
-        s=s.substring(0, i)+Math.log(x)+s.substring(j+1);
+        s=s.substring(0, i)+df.format(Math.log(x))+s.substring(j+1);
       }
       if (f.equals("abs")) {
-        s=s.substring(0, i)+Math.abs(x)+s.substring(j+1);
+        s=s.substring(0, i)+df.format(Math.abs(x))+s.substring(j+1);
       }
     }
-    System.out.println("b "+s+f);
     return s;
   }
 }

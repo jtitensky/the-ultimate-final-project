@@ -18,6 +18,7 @@ Development Log
 5-24 J: fixed stuff in evaluate for hopefully the last time
 5-25 J: made differentiate be for nth derivatives, and started matrix functions
 5-26 J: fixed graph input problem and did more matrix functions
+5-28 J: made small numbers not break evaluate when their in scientific notation
 
 Project Plan
 
