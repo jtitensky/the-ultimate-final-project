@@ -10,12 +10,12 @@ class Basic {
     textFont(f, 48);
     textSize(45);
     textAlign(CENTER);
-    text("Enter an expression", 300, 150);
-    r(100, 180, 400, 50, 5, color(91, 108, 235));
+    text("Enter an expression", 300, 100);
+    r(75, 125, 450, 50, 5, color(91, 108, 235));
   }
 
   boolean mouseOnBox() {
-    return 100<mouseX && mouseX<500 && 180<mouseY && mouseY<230;
+    return 75<mouseX && mouseX<450+75 && 125<mouseY && mouseY<175;
   }
 
   String result() {
@@ -35,11 +35,12 @@ class Basic {
   }
 
   void write() {
+    String writtenn="";
     //System.out.println(key);
     if (writing) {
       if (key==ENTER || key==RETURN) {
         create();
-        textSize(30);
+        textSize(25);
         fill(0, 0, 0);
         textAlign(LEFT);
         text(written, 110, 215);
@@ -52,11 +53,12 @@ class Basic {
         } else if (valid(key) ) {//&& written.length()<16) {
           written+=key;
         }
-        r(100, 180, 400, 50, 5, color(185, 191, 235));
-        textSize(30);
+        r(75, 125, 450, 50, 5, color(185, 191, 235));
+        textSize(25);
         fill(0, 0, 0);
         textAlign(LEFT);
-        text(written, 110, 215);
+        //if(written.length()
+        text(written, 85, 160);
         //System.out.println("l "+written.substring(written.length()-1));
       }
       //System.out.println(key=='?');
@@ -170,13 +172,17 @@ class Basic {
       parts.remove(parts.size()-1);
     }
     //broken up
-    //System.out.println("1 "+parts);
+    System.out.println("1 "+parts);
     for (int i=0; i<parts.size()-1; i++) {
       if (parts.get(i).equals("-")&&parts.get(i+1).equals("-")) {
         parts.set(i, "+");
         parts.remove(i+1);
         i--;
       }
+      if(parts.get(i).equals("+")&&parts.get(i+1).equals("-")){
+        parts.remove(i);
+        i--;
+      }      
       if (parts.get(i).equals("-")&&47<parts.get(i+1).charAt(0)&&parts.get(i+1).charAt(0)<58) {
         parts.set(i+1, ""+Double.parseDouble(parts.get(i+1))*-1);
         if (i>0&&47<parts.get(i-1).charAt(0)&&parts.get(i-1).charAt(0)<58) {

@@ -1,5 +1,3 @@
-
-/*
 public class Statistics {
 
   ArrayList<Double> data1;
@@ -35,11 +33,12 @@ public class Statistics {
     }
     q[2]=median(dd, 0, dd.size()-1);
     q[4]=dd.get(dd.size()-1);
+    return q;
   }
 
   double mean(ArrayList<Double> d) {
     double s=0;
-    for (int i=0; i<d.size()i++) {
+    for (int i=0; i<d.size();i++) {
       s+=d.get(i);
     }
     return s/d.size();
@@ -65,7 +64,7 @@ public class Statistics {
 
   double[] linearRegression(ArrayList<Double> x, ArrayList<Double> y) {
     if (x.size()!=y.size()) {
-      throw new IllegalOperationException();
+      throw new IllegalArgumentException();
     }
     double n=x.size();
     double sx1=0;
@@ -82,7 +81,7 @@ public class Statistics {
     }
     double r=(n*sxy-sx1*sy1)/Math.pow(n*sx2-sx1*sx1, .5)/Math.pow(n*sy2-sy1*sy1, .5);
     double m=(n*sxy-sx1*sy1)/(n*sx2-sx1*sx1);
-    double b=(sy1-m*sx1)/n
+    double b=(sy1-m*sx1)/n;
       double[] s=new double[4];
     s[0]=m;
     s[1]=b;
@@ -92,4 +91,3 @@ public class Statistics {
     //[slope, y intercept, correlation coefficient, coefficient of determination]
   }
 }
-*/

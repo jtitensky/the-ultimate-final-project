@@ -88,7 +88,7 @@ void draw() {
 void mouseClicked() {
   if (state=='b' && b1.mouseOnBox()) {
     b1.create();
-    r(100, 180, 400, 50, 5, color(185, 191, 235));
+    r(75, 125, 450, 50, 5, color(185, 191, 235));
     writing = true;
   }
   if (state == 'g') {

@@ -8,7 +8,7 @@ class Graph {
   Basic b2 = new Basic();
   double minX = -10.0;
   double maxX = 10.0;
-  double xStep = 0.25;
+  double xStep = 0.01;
   double minY = -10.0; 
   double maxY = 10.0;
   String[] written = new String[16];
@@ -179,6 +179,8 @@ class Graph {
 
 
   void graphh() {
+    DecimalFormat df=new DecimalFormat("#");
+      df.setMaximumFractionDigits(10);
     if (!written[10].equals("")) {
       minX = b2.evaluate(written[10]);
     }
@@ -211,8 +213,8 @@ class Graph {
           double x1, x2, y1, y2;
           x1 = yax + minn*sx;
           x2 = yax + (minn+xStep)*sx;
-          y1 = xax - evalFunc(written[i], minn)*sy;
-          y2 = xax - evalFunc(written[i], minn+xStep)*sy; 
+          y1 = xax - evalFunc(written[i], ""+df.format(minn))*sy;
+          y2 = xax - evalFunc(written[i], df.format(minn+xStep))*sy; 
           //System.out.println("("+minn+", "+evalFunc(written[i], minn)+") -> (" minn+xStep + ", " +evalFunc(written[i], minn+xStep)+")");
           //System.out.println("(" + x1 + ", " + y1 + ") -> (" +x2 + ", "+y2+")");
           line((float)(x1), (float)(y1), (float)(x2), (float)(y2)); 
@@ -226,7 +228,9 @@ class Graph {
     return f=='+' || f=='-'||f=='*'||f=='/'||f=='^';
   }
 
-  double evalFunc(String s, double i) {
+  double evalFunc(String s, String i){ //double i) {
+    DecimalFormat df=new DecimalFormat("#");
+      df.setMaximumFractionDigits(10);
     String g = "";
     for (int j = 0; j < s.length(); j++) {
       if (s.charAt(j) == 'x') {
@@ -243,6 +247,7 @@ class Graph {
     //System.out.println(g);
     Basic b2 = new Basic();
     //System.out.println(""+s+","+i+","+b2.evaluate(g)+"");
+    System.out.println("g "+g);
     return b2.evaluate(g);
   }
 }
