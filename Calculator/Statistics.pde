@@ -1,3 +1,5 @@
+
+/*
 public class Statistics {
 
   ArrayList<Double> data1;
@@ -90,3 +92,4 @@ public class Statistics {
     //[slope, y intercept, correlation coefficient, coefficient of determination]
   }
 }
+*/
