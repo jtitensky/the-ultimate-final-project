@@ -39,26 +39,64 @@ class Basic {
     ////System.out.println(key);
     if (writing) {
       if (key==ENTER || key==RETURN) {
-        create();
+        background(55, 219, 189);
+        int lines=1+written.length()/21;
+        r(75, 125, 450, 50*lines, 5, color(185, 191, 235));
+        fill(48, 71, 242);
+        textSize(45);
+        textAlign(CENTER);
+        text(result(), 300, 100);
         textSize(25);
         fill(0, 0, 0);
         textAlign(LEFT);
-        text(written, 110, 215);
-        text(result(), 200, 300);
+        if (written.length()>20) {
+          for (int i=0; i<written.length(); i++) {
+            if (i>0&&i%21==0) {
+              System.out.println("2   "+i);
+              writtenn+="\n";
+            }
+            writtenn+=written.charAt(i);
+          }
+          text(writtenn, 85, 160);
+          writtenn="";
+        } else {
+          text(written, 85, 160);
+        }
+        text(writtenn, 85, 160);
+        writtenn="";
+        //text(result(), 200, 300);
         writing=false;
-        written="";
       } else {
         if (key==BACKSPACE && written.length()>0) {
           written=written.substring(0, written.length()-1);
         } else if (valid(key) ) {//&& written.length()<16) {
           written+=key;
         }
-        r(75, 125, 450, 50, 5, color(185, 191, 235));
+        background(55, 219, 189);
+        int lines=1+written.length()/21;
+        r(75, 125, 450, 50*lines, 5, color(185, 191, 235));
+        fill(48, 71, 242);
+        textSize(45);
+        textAlign(CENTER);
+        text("Enter an expression", 300, 100);
         textSize(25);
         fill(0, 0, 0);
         textAlign(LEFT);
-        //if(written.length()
-        text(written, 85, 160);
+        if (written.length()>20) {
+          for (int i=0; i<written.length(); i++) {
+            if (i>0&&i%21==0) {
+              System.out.println("2   "+i);
+              writtenn+="\n";
+            }
+            writtenn+=written.charAt(i);
+          }
+          text(writtenn, 85, 160);
+          writtenn="";
+        } else {
+          text(written, 85, 160);
+        }
+        text(writtenn, 85, 160);
+        writtenn="";
         ////System.out.println("l "+written.substring(written.length()-1));
       }
       ////System.out.println(key=='?');
@@ -179,7 +217,7 @@ class Basic {
         parts.remove(i+1);
         i--;
       }
-      if(parts.get(i).equals("+")&&parts.get(i+1).equals("-")){
+      if (parts.get(i).equals("+")&&parts.get(i+1).equals("-")) {
         parts.remove(i);
         i--;
       }      
