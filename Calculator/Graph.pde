@@ -302,10 +302,10 @@ class Graph {
             double ans = evalFunc(written[i], df.format(minn));
             double ans1 = evalFunc(written[i], df.format(minn+oStep));
             System.out.println(ans+""+ans1);
-            double xp = b2.evaluate(""+ans+"/"+"cos("+minn+")");
-            double yp = b2.evaluate(""+ans+"/"+"sin("+minn+")");
-            double xp1 = b2.evaluate(""+ans1+"/"+"cos("+(minn+oStep)+")");
-            double yp1 = b2.evaluate(""+ans1+"/"+"sin("+(minn+oStep)+")");
+            double xp = b2.evaluate(""+ans+"*"+"cos("+minn+")");
+            double yp = b2.evaluate(""+ans+"*"+"sin("+minn+")");
+            double xp1 = b2.evaluate(""+ans1+"*"+"cos("+(minn+oStep)+")");
+            double yp1 = b2.evaluate(""+ans1+"*"+"sin("+(minn+oStep)+")");
 
             double x1, x2, y1, y2;
             x1 = yax + xp*sx;

@@ -12,6 +12,7 @@ class Basic {
     textAlign(CENTER);
     text("Enter an expression", 300, 100);
     r(75, 125, 450, 50, 5, color(91, 108, 235));
+    written="";
   }
 
   boolean mouseOnBox() {
@@ -41,7 +42,7 @@ class Basic {
       if (key==ENTER || key==RETURN) {
         background(55, 219, 189);
         int lines=1+written.length()/21;
-        r(75, 125, 450, 50*lines, 5, color(185, 191, 235));
+        r(75, 125, 450, 50*lines, 5, color(91, 108, 235));
         fill(48, 71, 242);
         textSize(45);
         textAlign(CENTER);
@@ -210,7 +211,7 @@ class Basic {
       parts.remove(parts.size()-1);
     }
     //broken up
-    //System.out.println("1 "+parts);
+    System.out.println("1 "+parts);
     for (int i=0; i<parts.size()-1; i++) {
       if (parts.get(i).equals("-")&&parts.get(i+1).equals("-")) {
         parts.set(i, "+");
@@ -221,8 +222,17 @@ class Basic {
         parts.remove(i);
         i--;
       }      
+      if (parts.get(i).equals("*")&&parts.get(i+1).equals("-")) {
+        parts.remove(i+1);
+        parts.set(i+1, "-"+parts.get(i+1));
+        i--;
+      }  
+      if (parts.get(i).equals("/")&&parts.get(i+1).equals("-")) {
+        parts.remove(i);
+        i--;
+      }  
       if (parts.get(i).equals("-")&&47<parts.get(i+1).charAt(0)&&parts.get(i+1).charAt(0)<58) {
-        parts.set(i+1, ""+Double.parseDouble(parts.get(i+1))*-1);
+
         if (i>0&&47<parts.get(i-1).charAt(0)&&parts.get(i-1).charAt(0)<58) {
           parts.set(i, "+");
         } else {
@@ -316,10 +326,12 @@ class Basic {
       throw new IllegalArgumentException();
     }
     if (parts.size()==1) {
+      if(parts.get(0).equals("-0.0")){
+        return 0.0;
+      }
       return Double.parseDouble(parts.get(0));
     }
-    if (parts.size()==2&&parts.get(0)=="-") {
-      return -1*Double.parseDouble(parts.get(1));
+    if (parts.size()==2&&parts.get(0)=="-"&&parts.get(1)!="0.0") {
     }
     throw new UnsupportedOperationException();
   }
