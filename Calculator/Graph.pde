@@ -11,7 +11,10 @@ class Graph {
   double xStep = 0.01;
   double minY = -10.0; 
   double maxY = 10.0;
-  String[] written = new String[16];
+  double oMin = -10.0;
+  double oMax = 10.0;
+  double oStep = 0.25;
+  String[] written = new String[17];
   char mode = 'r';
   int wToWriteX, wToWriteY, cWritten;
 
@@ -41,6 +44,9 @@ class Graph {
       text("x-max:", 53, 83);
       text("y-min:", 53, 123);
       text("y-max:", 53, 163);
+      text("x-Step:", 244, 47);
+      r(289, 23, 50, 30, 5, color(91, 108, 235));
+
       fill(48, 71, 242);
       for (int j = 180; j < 550; j+=40) {
         r(40, j, 300, 30, 5, color(91, 108, 235));
@@ -58,6 +64,7 @@ class Graph {
         textSize(20);
         text(written[j], 158, i+22);
       }
+      text(written[14], 350, 44);
     }
 
     if (mode == 'c') {
@@ -69,8 +76,13 @@ class Graph {
       text("x-max:", 53, 83);
       text("y-min:", 53, 123);
       text("y-max:", 53, 163);
-      text("ø-min:", 234, 40);
-      text("ø-max:", 234, 80);
+      text("ø-min:", 244, 47);
+      text("ø-max:", 244, 87);
+      text("ø-Step:", 244, 127);
+      r(289, 23, 50, 30, 5, color(91, 108, 235));
+      r(289, 63, 50, 30, 5, color(91, 108, 235));
+      r(289, 103, 50, 30, 5, color(91, 108, 235));
+
       fill(48, 71, 242);
       for (int j = 180; j < 550; j+=40) {
         r(40, j, 300, 30, 5, color(91, 108, 235));
@@ -88,11 +100,16 @@ class Graph {
         textSize(20);
         text(written[j], 158, i+22);
       }
+      for (int i = 44, j = 14; j < 17; i+=40, j++) {
+        textSize(20);
+        text(written[j], 350, i);
+      }
     }
   }
 
   void mClick() {
     if (mouseX>500&&mouseX<550&&mouseY>50&&mouseY<100) {
+      //mode = 'g';
       graphh();
     }
     if (mouseX>400&&mouseX<480&&mouseY>20&&mouseY<50) {
@@ -107,6 +124,7 @@ class Graph {
       mode = 'p';
       create();
     }
+    //if (!(mode=='g')) {
     if (mouseX > 40 && mouseX < 340 && mouseY > 170) {
       for (int x = 180; x < 570; x+=40) {
         if (mouseY > x && mouseY < x+40) {
@@ -116,6 +134,7 @@ class Graph {
           //System.out.println(cWritten);
           wToWriteX = 50;
           wToWriteY = x+25;
+          written[cWritten] = "";
           x = 600;
         }
       }
@@ -129,8 +148,28 @@ class Graph {
             //System.out.println(cWritten);
             wToWriteX = 105;
             wToWriteY = x+23;
+            written[cWritten] = "";
             x = 6000;
           }
+        }
+      }
+    }
+    // }
+    if (mode == 'r' && mouseX > 289 && mouseX < 339 && mouseY > 23 && mouseY < 53) {
+      r(289, 23, 50, 30, 5, color(185, 191, 235));
+      cWritten = 14;
+      wToWriteX = 294;
+      wToWriteY = 46;
+      written[cWritten] = "";
+    }
+    if ( mode == 'c' && mouseX > 289 && mouseX < 339 && mouseY < 135) {
+      for (int i = 23; i < 110; i+= 40) {
+        if (mouseY > i && mouseY < i+30) {
+          r(289, i, 50, 30, 5, color(185, 191, 235));
+          cWritten = 14+(int)((i-23)/40); 
+          wToWriteX = 294;
+          wToWriteY = i+22;
+          written[cWritten] = "";
         }
       }
     }
@@ -154,10 +193,19 @@ class Graph {
           if (cWritten<10) {
             r(40, 180+40*cWritten, 300, 30, 5, color(185, 191, 235));
           } else {
-            r(100, 20 +40*(Math.abs(10-cWritten)), 50, 30, 5, color(185, 191, 235));
+            if (cWritten < 14) {
+              r(100, 20 +40*(Math.abs(10-cWritten)), 50, 30, 5, color(185, 191, 235));
+            } else {
+              r(289, 23+40*(Math.abs(14-cWritten)), 50, 30, 5, color(185, 191, 235));
+            }
           }
-        } else if (written[cWritten].length()<16 && b2.valid(key)) {
-          written[cWritten]+=key;
+        } else {
+          if (cWritten < 10 && written[cWritten].length()<16 && b2.valid(key)) {
+            written[cWritten]+=key;
+          }
+          if (cWritten >= 10 && written[cWritten].length() < 3 && b2.valid(key)) {
+            written[cWritten]+=key;
+          }
         }
         textSize(22);
         fill(0, 0, 0);
@@ -176,11 +224,9 @@ class Graph {
   }
 
 
-
-
   void graphh() {
     DecimalFormat df=new DecimalFormat("#");
-      df.setMaximumFractionDigits(10);
+    df.setMaximumFractionDigits(9);
     if (!written[10].equals("")) {
       minX = b2.evaluate(written[10]);
     }
@@ -193,8 +239,21 @@ class Graph {
     if (!written[13].equals("")) {
       maxY = b2.evaluate(written[13]);
     }
+    if (!written[14].equals("") && mode=='r') {
+      xStep = b2.evaluate(written[14]);
+    }
+    if (mode == 'c') {
+      if (!written[14].equals("")) {
+        oMin = b2.evaluate(written[14]);
+      }
+      if (!written[15].equals("")) {
+        oMax = b2.evaluate(written[15]);
+      }
+      if (!written[16].equals("")) {
+        oStep = b2.evaluate(written[16]);
+      }
+    }
     background(55, 219, 189);
-    fill(0);
     double sy = 600/(maxY-minY);
     double sx = 600/(maxX-minX);
     double yax = Math.abs((minX*sx));
@@ -203,51 +262,90 @@ class Graph {
     //System.out.println(sy+" "+sx);
     r(0, (float)(xax), 600, 0, 10, color(0));
     r((float)(yax), 0, 0, 600, 10, color(0));
-    for (int i = 0; i < written.length; i++) {
-      if (!written[i].equals("")) {
-        //System.out.println(written[i]);
-        double minn = minX;
-        while (minn < maxX) { 
-          fill(100, 200, 150);
-          //System.out.println(minn);
-          double x1, x2, y1, y2;
-          x1 = yax + minn*sx;
-          x2 = yax + (minn+xStep)*sx;
-          y1 = xax - evalFunc(written[i], ""+df.format(minn))*sy;
-          y2 = xax - evalFunc(written[i], df.format(minn+xStep))*sy; 
-          //System.out.println("("+minn+", "+evalFunc(written[i], minn)+") -> (" minn+xStep + ", " +evalFunc(written[i], minn+xStep)+")");
-          //System.out.println("(" + x1 + ", " + y1 + ") -> (" +x2 + ", "+y2+")");
-          line((float)(x1), (float)(y1), (float)(x2), (float)(y2)); 
-          minn += xStep;
+    System.out.println(mode);
+    if (mode == 'r') {
+      for (int i = 0; i < written.length; i++) {
+        if (!written[i].equals("")) {
+          //System.out.println(written[i]);
+          fill(20*i);
+          double minn = minX;
+          while (minn < maxX) { 
+            try {
+              // fill(100, 200, 150);
+              //System.out.println(minn);
+              double x1, x2, y1, y2;
+              x1 = yax + minn*sx;
+              x2 = yax + (minn+xStep)*sx;
+              y1 = xax - evalFunc(written[i], df.format(minn))*sy;
+              y2 = xax - evalFunc(written[i], df.format(minn+xStep))*sy; 
+              //System.out.println("("+minn+", "+evalFunc(written[i], minn)+") -> (" minn+xStep + ", " +evalFunc(written[i], minn+xStep)+")");
+              //System.out.println("(" + x1 + ", " + y1 + ") -> (" +x2 + ", "+y2+")");
+              line((float)(x1), (float)(y1), (float)(x2), (float)(y2));
+            } 
+            catch (IllegalArgumentException e) {
+            }
+            minn += xStep;
+          }
         }
       }
     }
+    if (mode == 'c') {
+      for (int i = 0; i < written.length; i++) {
+        if (!written[i].equals("")) {
+          //System.out.println(written[i]);
+          fill(20*i);
+          double minn = oMin;
+          while (minn < oMax) { 
+            //try {
+            // fill(100, 200, 150);
+            //System.out.println(minn);
+            double ans = evalFunc(written[i], df.format(minn));
+            double ans1 = evalFunc(written[i], df.format(minn+oStep));
+            System.out.println(ans+""+ans1);
+            double xp = b2.evaluate(""+ans+"/"+"cos("+minn+")");
+            double yp = b2.evaluate(""+ans+"/"+"sin("+minn+")");
+            double xp1 = b2.evaluate(""+ans1+"/"+"cos("+(minn+oStep)+")");
+            double yp1 = b2.evaluate(""+ans1+"/"+"sin("+(minn+oStep)+")");
+
+            double x1, x2, y1, y2;
+            x1 = yax + xp*sx;
+            x2 = yax + xp1*sx;
+            y1 = xax - yp*sy;
+            y2 = xax - yp1*sy; 
+            //System.out.println("("+minn+", "+evalFunc(written[i], minn)+") -> (" minn+xStep + ", " +evalFunc(written[i], minn+xStep)+")");
+            //System.out.println("(" + x1 + ", " + y1 + ") -> (" +x2 + ", "+y2+")");
+            line((float)(x1), (float)(y1), (float)(x2), (float)(y2)); 
+            // catch (IllegalArgumentException e) {
+            minn += oStep;
+          }
+        }
+      }
+    }
+    r(0, (float)(xax - sy*xStep), 600, 0, 4, color(55, 219, 189));
   }
 
   boolean op(char f) {
     return f=='+' || f=='-'||f=='*'||f=='/'||f=='^';
   }
 
-  double evalFunc(String s, String i){ //double i) {
+  double evalFunc(String s, String i) {
     DecimalFormat df=new DecimalFormat("#");
-      df.setMaximumFractionDigits(10);
+    df.setMaximumFractionDigits(9);
     String g = "";
     for (int j = 0; j < s.length(); j++) {
       if (s.charAt(j) == 'x') {
         if (j > 0 && Character.isDigit(s.charAt(j-1))) {
-          g += "*" + i;
+          g += "*(" + i+")";
         } else {
           g += "(" + i + ")";
         }
       } else {
-
         g += s.charAt(j);
       }
     }
-    //System.out.println(g);
+    System.out.println(g);
     Basic b2 = new Basic();
     //System.out.println(""+s+","+i+","+b2.evaluate(g)+"");
-    System.out.println("g "+g);
     return b2.evaluate(g);
   }
 }

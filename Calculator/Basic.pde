@@ -36,7 +36,7 @@ class Basic {
 
   void write() {
     String writtenn="";
-    //System.out.println(key);
+    ////System.out.println(key);
     if (writing) {
       if (key==ENTER || key==RETURN) {
         create();
@@ -59,12 +59,12 @@ class Basic {
         textAlign(LEFT);
         //if(written.length()
         text(written, 85, 160);
-        //System.out.println("l "+written.substring(written.length()-1));
+        ////System.out.println("l "+written.substring(written.length()-1));
       }
-      //System.out.println(key=='?');
-      //System.out.println(keyPressed);
+      ////System.out.println(key=='?');
+      ////System.out.println(keyPressed);
       if (written.length()>0 && written.substring(written.length()-1).equals("?")) {
-        //System.out.println("now");
+        ////System.out.println("now");
         written=written.substring(0, written.length()-1);
       }
     }
@@ -72,15 +72,15 @@ class Basic {
 
 
   double evaluate(String s) {
-    //System.out.println(s);
+    ////System.out.println(s);
     s=s.replace("e", ""+Math.E);
     s=s.replace("pi", ""+Math.PI);
     s=s.replace("--", "+");
     s=s.replace("+-", "-");
-    //System.out.println(s);
+    ////System.out.println(s);
     s=s.replace("*-", "*-1*");
     s=s.replace("/-", "*-1/");
-    //System.out.println(s);
+    ////System.out.println(s);
     s=s.replace("e", ""+Math.E);
     s=s.replace("pi", ""+Math.PI);
     boolean radian=true;
@@ -94,9 +94,9 @@ class Basic {
       s=evalF(s, "acrtan", radian);
     }
     while (s.contains("sin")) {
-      //System.out.println("SS "+s);
+      ////System.out.println("SS "+s);
       s=evalF(s, "sin", radian);
-      //System.out.println("SSS "+s);
+      ////System.out.println("SSS "+s);
     }
     while (s.contains("cos")) {
       s=evalF(s, "cos", radian);
@@ -172,7 +172,7 @@ class Basic {
       parts.remove(parts.size()-1);
     }
     //broken up
-    System.out.println("1 "+parts);
+    //System.out.println("1 "+parts);
     for (int i=0; i<parts.size()-1; i++) {
       if (parts.get(i).equals("-")&&parts.get(i+1).equals("-")) {
         parts.set(i, "+");
@@ -193,7 +193,7 @@ class Basic {
         i--;
       }
     }
-    //System.out.println(parts);
+    ////System.out.println(parts);
     try {
       int i;
       i=parts.indexOf("!");
