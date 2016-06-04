@@ -70,7 +70,7 @@ public class Matricies {
 
   double determinant(double[][] a) {
     if (a.length!=a[0].length) {
-      egalArgumentException();
+      throw new IllegalArgumentException();
     }
     if (a.length==1) {
       return a[0][0];

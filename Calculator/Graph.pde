@@ -5,15 +5,22 @@ class Graph {
     }
   }
 
+  void clearS() {
+    written = new String[17];  
+    for (int i = 0; i < written.length; i++) {
+      written[i] = "";
+    }
+  }
+
   Basic b2 = new Basic();
-  double minX = -10.0;
-  double maxX = 10.0;
-  double xStep = 0.01;
-  double minY = -10.0; 
-  double maxY = 10.0;
+  double minX = -2.0;
+  double maxX = 2.0;
+  double xStep = 0.25;
+  double minY = -2.0; 
+  double maxY = 2.0;
   double oMin = -10.0;
   double oMax = 10.0;
-  double oStep = 0.25;
+  double oStep = 0.1;
   String[] written = new String[17];
   char mode = 'r';
   int wToWriteX, wToWriteY, cWritten;
@@ -105,23 +112,67 @@ class Graph {
         text(written[j], 350, i);
       }
     }
+    if (mode == 'p') {
+      fill(250, 8, 8);
+      for (int j = 203, i = 0; j < 570 || i < 5; j+=80, i++) {
+        text("x"+i+":", 20, j);
+        text("y"+i+":", 20, j+40);
+      }
+      text("x-min:", 53, 43);
+      text("x-max:", 53, 83);
+      text("y-min:", 53, 123);
+      text("y-max:", 53, 163);
+      text("t-min:", 244, 47);
+      text("t-max:", 244, 87);
+      text("t-Step:", 244, 127);
+      r(289, 23, 50, 30, 5, color(91, 108, 235));
+      r(289, 63, 50, 30, 5, color(91, 108, 235));
+      r(289, 103, 50, 30, 5, color(91, 108, 235));
+
+      fill(48, 71, 242);
+      for (int j = 180; j < 550; j+=40) {
+        r(40, j, 300, 30, 5, color(91, 108, 235));
+      }
+      for (int j = 20; j < 150; j+=40) {
+        r(100, j, 50, 30, 5, color(91, 108, 235));
+      }
+      for (int i = 180, j = 0; i < 550 && j < 10; i+=40, j++) {
+        //System.out.println(written[j]);
+        textSize(25);
+        textAlign(LEFT);
+        text(written[j], 350, i+22);
+      }
+      for (int i = 20, j = 10; i < 150 && j < 14; i+=40, j++) {
+        textSize(20);
+        text(written[j], 158, i+22);
+      }
+      for (int i = 44, j = 14; j < 17; i+=40, j++) {
+        textSize(20);
+        text(written[j], 350, i);
+      }
+    }
   }
 
-  void mClick() {
+  void mClick() {  
+    System.out.println(evalFunc("2x", "-2.0")); 
+
     if (mouseX>500&&mouseX<550&&mouseY>50&&mouseY<100) {
       //mode = 'g';
       graphh();
     }
     if (mouseX>400&&mouseX<480&&mouseY>20&&mouseY<50) {
       mode = 'r';
+      clearS();
       create();
     }
     if (mouseX>400&&mouseX<480&&mouseY>60&&mouseY<90) {
       mode = 'c';
+      clearS();
       create();
     }
     if (mouseX>400&&mouseX<480&&mouseY>100&&mouseY<130) {
       mode = 'p';
+      clearS();
       create();
     }
     //if (!(mode=='g')) {
@@ -162,7 +213,7 @@ class Graph {
       wToWriteY = 46;
       written[cWritten] = "";
     }
-    if ( mode == 'c' && mouseX > 289 && mouseX < 339 && mouseY < 135) {
+    if ( mode == 'c' || mode == 'p' && mouseX > 289 && mouseX < 339 && mouseY < 135) {
       for (int i = 23; i < 110; i+= 40) {
         if (mouseY > i && mouseY < i+30) {
           r(289, i, 50, 30, 5, color(185, 191, 235));
@@ -226,7 +277,7 @@ class Graph {
 
   void graphh() {
     DecimalFormat df=new DecimalFormat("#");
-    df.setMaximumFractionDigits(9);
+    df.setMaximumFractionDigits(10);
     if (!written[10].equals("")) {
       minX = b2.evaluate(written[10]);
     }
@@ -242,7 +293,7 @@ class Graph {
     if (!written[14].equals("") && mode=='r') {
       xStep = b2.evaluate(written[14]);
     }
-    if (mode == 'c') {
+    if (mode == 'c' || mode == 'p') {
       if (!written[14].equals("")) {
         oMin = b2.evaluate(written[14]);
       }
@@ -260,8 +311,6 @@ class Graph {
     double xax = Math.abs((maxY*sy));
     System.out.println("| sx:" + sx + ", sy:" + sy + ", yax:" + yax + ", xax:" + xax);
     //System.out.println(sy+" "+sx);
-    r(0, (float)(xax), 600, 0, 10, color(0));
-    r((float)(yax), 0, 0, 600, 10, color(0));
     System.out.println(mode);
     if (mode == 'r') {
       for (int i = 0; i < written.length; i++) {
@@ -270,20 +319,23 @@ class Graph {
           fill(20*i);
           double minn = minX;
           while (minn < maxX) { 
-            try {
-              // fill(100, 200, 150);
-              //System.out.println(minn);
-              double x1, x2, y1, y2;
-              x1 = yax + minn*sx;
-              x2 = yax + (minn+xStep)*sx;
-              y1 = xax - evalFunc(written[i], df.format(minn))*sy;
-              y2 = xax - evalFunc(written[i], df.format(minn+xStep))*sy; 
-              //System.out.println("("+minn+", "+evalFunc(written[i], minn)+") -> (" minn+xStep + ", " +evalFunc(written[i], minn+xStep)+")");
-              //System.out.println("(" + x1 + ", " + y1 + ") -> (" +x2 + ", "+y2+")");
-              line((float)(x1), (float)(y1), (float)(x2), (float)(y2));
-            } 
-            catch (IllegalArgumentException e) {
-            }
+            //try {
+            // fill(100, 200, 150);
+            //System.out.println(minn);
+            double x1, x2, y1, y2;
+            x1 = yax + minn*sx;
+            x2 = yax + (minn+xStep)*sx;
+            //System.out.println(df.format(minn));
+            //System.out.println(evalFunc(written[i], df.format(minn))*sy);
+            y1 = xax - evalFunc(written[i], df.format(minn))*sy;
+            y2 = xax - evalFunc(written[i], df.format(minn+xStep))*sy; 
+            //System.out.println(x1 + " " + y1);// + " " + x2 + " " + y2);
+            //System.out.println("("+minn+", "+evalFunc(written[i], minn)+") -> (" minn+xStep + ", " +evalFunc(written[i], minn+xStep)+")");
+            //System.out.println("(" + x1 + ", " + y1 + ") -> (" +x2 + ", "+y2+")");
+            line((float)(x1), (float)(y1), (float)(x2), (float)(y2));
+            //} 
+            //catch (IllegalArgumentException e) {
+            //}
             minn += xStep;
           }
         }
@@ -301,11 +353,16 @@ class Graph {
             //System.out.println(minn);
             double ans = evalFunc(written[i], df.format(minn));
             double ans1 = evalFunc(written[i], df.format(minn+oStep));
-            System.out.println(ans+""+ans1);
-            double xp = b2.evaluate(""+ans+"*"+"cos("+minn+")");
-            double yp = b2.evaluate(""+ans+"*"+"sin("+minn+")");
-            double xp1 = b2.evaluate(""+ans1+"*"+"cos("+(minn+oStep)+")");
-            double yp1 = b2.evaluate(""+ans1+"*"+"sin("+(minn+oStep)+")");
+            //System.out.println(ans+" "+ans1);
+            String exp = ""+df.format(ans)+"*"+"cos("+df.format(minn)+")";
+            //System.out.println(exp);
+            String eyp = ""+df.format(ans)+"*"+"sin("+df.format(minn)+")";
+            String exp1 = ""+df.format(ans1)+"*"+"cos("+df.format((minn+oStep))+")";
+            String eyp1 = ""+df.format(ans1)+"*"+"sin("+df.format((minn+oStep))+")";
+            double xp = b2.evaluate(df.format(exp));
+            double yp = b2.evaluate(df.format(eyp));
+            double xp1 = b2.evaluate(df.format(exp1));
+            double yp1 = b2.evaluate(df.format(eyp1));
 
             double x1, x2, y1, y2;
             x1 = yax + xp*sx;
@@ -321,7 +378,38 @@ class Graph {
         }
       }
     }
-    r(0, (float)(xax - sy*xStep), 600, 0, 4, color(55, 219, 189));
+    if (mode == 'p') {
+      for (int i = 0; i < written.length; i+=2) {
+        if (!written[i].equals("")&&!written[i+1].equals("")) {
+          //System.out.println(written[i]);
+          fill(20*i);
+          double minn = oMin;
+          while (minn < oMax) { 
+            //try {
+            // fill(100, 200, 150);
+            //System.out.println(minn);
+            double xp = evalFunc(written[i], df.format(minn));
+            double xp1 = evalFunc(written[i], df.format(minn+oStep));
+            double yp = evalFunc(written[i+1], df.format(minn));
+            double yp1 = evalFunc(written[i+1], df.format(minn+oStep));
+
+            double x1, x2, y1, y2;
+            x1 = yax + xp*sx;
+            x2 = yax + xp1*sx;
+            y1 = xax - yp*sy;
+            y2 = xax - yp1*sy; 
+            
+            System.out.println(x1 + " " + y1);
+            //System.out.println("(" + x1 + ", " + y1 + ") -> (" +x2 + ", "+y2+")");
+            line((float)(x1), (float)(y1), (float)(x2), (float)(y2)); 
+            // catch (IllegalArgumentException e) {
+            minn += oStep;
+          }
+        }
+      }
+    }
+    r(0, (float)(xax), 600, 0, 10, color(0));
+    r((float)(yax), 0, 0, 600, 10, color(0));
   }
 
   boolean op(char f) {
@@ -330,7 +418,7 @@ class Graph {
 
   double evalFunc(String s, String i) {
     DecimalFormat df=new DecimalFormat("#");
-    df.setMaximumFractionDigits(9);
+    df.setMaximumFractionDigits(10);
     String g = "";
     for (int j = 0; j < s.length(); j++) {
       if (s.charAt(j) == 'x') {
