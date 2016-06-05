@@ -32,7 +32,8 @@ class Graph {
     textFont(f, 48);
     textSize(22);
     textAlign(CENTER);
-    r(500, 50, 50, 50, 10, color(0));
+    r(500, 20, 60, 20, 5, color(91, 108, 235));
+    r(500, 45, 60, 30, 5, color(0));
 
     r(400, 20, 80, 30, 5, color(91, 108, 235));
     r(400, 60, 80, 30, 5, color(91, 108, 235));
@@ -151,12 +152,23 @@ class Graph {
         text(written[j], 350, i);
       }
     }
+    r(500, 20, 60, 20, 5, color(91, 108, 235));
+    fill(0);
+    textSize(15);
+    text("BACK", 510, 36);
+    textSize(15);
+    fill(232, 213, 37);
+    text("GRAPH", 505, 66);
   }
 
   void mClick() {  
     System.out.println(evalFunc("2x", "-2.0")); 
-
-    if (mouseX>500&&mouseX<550&&mouseY>50&&mouseY<100) {
+    if(mouseX>500&&mouseX<560&&mouseY>20&&mouseY<40){
+      System.out.println("boiii");
+      state = ' '; 
+    }
+    if (mouseX>500&&mouseX<560&&mouseY>45&&mouseY<75) {
+      //r(500, 45, 60, 30, 5, color(0));
       //mode = 'g';
       graphh();
     }
@@ -309,6 +321,7 @@ class Graph {
     double sx = 600/(maxX-minX);
     double yax = Math.abs((minX*sx));
     double xax = Math.abs((maxY*sy));
+    System.out.println(minX + " " + maxX + " " + minY + " " + maxY);
     System.out.println("| sx:" + sx + ", sy:" + sy + ", yax:" + yax + ", xax:" + xax);
     //System.out.println(sy+" "+sx);
     System.out.println(mode);
@@ -362,7 +375,7 @@ class Graph {
             System.out.println(exp1);
             String eyp1 = ""+df.format(ans1)+"*"+"sin("+df.format((minn+oStep))+")";
             System.out.println(eyp1);
-             //everything up till here is good ;-;
+            //everything up till here is good ;-;
             double xp = b2.evaluate(exp);
             System.out.println("boop");
             double yp = b2.evaluate(eyp);
@@ -387,7 +400,7 @@ class Graph {
       for (int i = 0; i < written.length; i+=2) {
         if (!written[i].equals("")&&!written[i+1].equals("")) {
           //System.out.println(written[i]);
-          fill(20*i);
+          fill(0);
           double minn = oMin;
           while (minn < oMax) { 
             //try {
@@ -436,7 +449,7 @@ class Graph {
         g += s.charAt(j);
       }
     }
-    //System.out.println(g);
+    System.out.println(g);
     Basic b2 = new Basic();
     //System.out.println(""+s+","+i+","+b2.evaluate(g)+"");
     return b2.evaluate(g);

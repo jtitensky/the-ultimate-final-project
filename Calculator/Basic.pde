@@ -1,24 +1,151 @@
-class Basic {
-
+class Basic {  
   Basic() {
   }
   String ans = ""; 
+  String writtenE = "";
+  int wToWriteX;
+  int wToWriteY;
+  int code = -1; 
+  double uBound, dBound, val;
+  String exp = "";
+  String exp1 = "";
+  int n;
+
   void create() {
-    background(55, 219, 189);
+    //System.out.println(c1.integrate(0.0, 2.0, "x", 'x'));
+    background(100, 87, 75);
     fill(48, 71, 242);
     PFont f = createFont("Comic Sans MS Bold", 48); //HATERS GONNA HATE, BUT COMIC SANS IS LOVE, COMIC SANS IS LIFE, //...
     textFont(f, 48);
+    fill(222, 218, 215);
+    ///////
     textSize(25);
     textAlign(RIGHT);
-    text("Enter an expression:", 260, 35);
+    text("Enter an expression:", 263, 35);
     textAlign(LEFT);
     text("Ans: "+ans, 350, 37);
-    r(20, 52, 450, 40, 5, color(91, 108, 235));
+    r(20, 52, 450, 40, 5, color(234, 162, 102));
+    textAlign(LEFT);
+    fill(0);
+    text(writtenE, 30, 82);
     written="";
+    ///////
+
+    //////////////////
+    fill(222, 218, 215);
+    textSize(80);
+    textAlign(RIGHT);
+    text("∫", 45, 305);
+    r(44, 240, 100, 20, 5, color(234, 162, 102));
+    r(44, 300, 100, 20, 5, color(234, 162, 102));
+    r(55, 265, 300, 30, 5, color(234, 162, 102));
+    r(380, 300, 80, 20, 5, color(234, 162, 102));
+    fill(222, 218, 215);
+    textAlign(LEFT);
+    textSize(16);
+    text(uBound+"", 150, 256);
+    text(dBound+"", 150, 316);
+    textSize(13);
+    fill(0);
+    text("INTEGRATE", 385, 316);
+    textSize(22);
+    fill(222, 218, 215);
+    text(exp, 366, 287);
+    //////////////////
+
+    //////////////////
+    fill(222, 218, 215);
+    textSize(30);
+    textAlign(RIGHT);
+    text("dx", 48, 475);
+    text("dy", 48, 515);
+    textSize(60);
+    text("-", 48, 500);
+    r(58, 470, 300, 30, 5, color(234, 162, 102));
+    textSize(22);
+    fill(222, 218, 215);
+    text("@ x = ", 84, 556);
+    text("@ the         derivative", 365, 556);
+    r(84, 540, 40, 20, 5, color(234, 162, 102));
+    r(210, 540, 40, 20, 5, color(234, 162, 102));
+    r(380, 510, 80, 20, 5, color(234, 162, 102));
+    fill(222, 218, 215);
+    textAlign(LEFT);
+    text(exp1, 373, 493);
+    textSize(14);
+    fill(0);
+    text("DERIVATE", 385, 526);
+    textSize(16);
+    fill(222, 218, 215);
+    text(val+"", 88, 580);
+    text(n+"", 213, 580);
+    //////////
+
+    r(500, 550, 60, 20, 5, color(234, 162, 102));
+    fill(0);
+    textSize(15);
+    text("BACK", 510, 566);
   }
 
-  boolean mouseOnBox() {
-    return 20<mouseX && mouseX<470 && 52<mouseY && mouseY<97;
+  void mClick() {
+    if(mouseX > 500 && mouseX < 560 && mouseY > 550 && mouseY < 570){
+     state = ' '; 
+    }
+    if (20<mouseX && mouseX<470 && 52<mouseY && mouseY<97) {
+      r(20, 52, 450, 40, 5, color(185, 191, 235));
+      wToWriteX = 30;
+      wToWriteY = 80;
+      code = 0;
+    }
+    if (44<mouseX && mouseX<144 && 240<mouseY && mouseY<260) {
+      code = 1; 
+      writtenE = "";
+      r(44, 240, 100, 20, 5, color(185, 191, 235));
+      wToWriteX = 48;
+      wToWriteY = 256;
+    }
+    if (44<mouseX && mouseX<144 && 300<mouseY && mouseY<320) {
+      code = 2; 
+      writtenE = "";
+      r(44, 300, 100, 20, 5, color(185, 191, 235));
+      wToWriteX = 48;
+      wToWriteY = 316;
+    }
+    if (55<mouseX && mouseX<355 && 265<mouseY && mouseY<295) {
+      code = 3;
+      r(55, 265, 300, 30, 5, color(185, 191, 235));
+      writtenE = "";
+      wToWriteX = 55;
+      wToWriteY = 286;
+    }
+    if (380<mouseX && mouseX<460 && 300<mouseY && mouseY<320) {
+      ans = ""+c1.integrate(dBound, uBound, exp, 'x');
+    }
+    //r(380, 510, 80, 20, 5, color(234, 162, 102));
+    if (380<mouseX && mouseX<460 && 510<mouseY && mouseY<530) {
+      ans = ""+c1.differentiate('x', exp1, val, n);
+    }
+    if (58<mouseX && mouseX<358 && 470<mouseY && mouseY<500) {
+      code = 4;
+      r(58, 470, 300, 30, 5, color(185, 191, 235));
+      writtenE = "";
+      wToWriteX = 62;
+      wToWriteY = 493;
+    }
+    if (84<mouseX && mouseX<124 && 540<mouseY && mouseY<560) {
+      code = 5;
+      r(84, 540, 40, 20, 5, color(185, 191, 235));
+      writtenE = "";
+      wToWriteX = 88;
+      wToWriteY = 556;
+    }
+    if (210<mouseX && mouseX<250 && 540<mouseY && mouseY<560) {
+      code = 6;
+      r(210, 540, 40, 20, 5, color(185, 191, 235));
+      writtenE = "";
+      wToWriteX = 212;
+      wToWriteY = 556;
+    }
   }
 
   String result() {
@@ -26,10 +153,10 @@ class Basic {
       return ""+evaluate(written);
     }
     catch(IllegalArgumentException e) {
-      return "this expression is invalid";
+      return "INVALID ERR";
     }
     catch(UnsupportedOperationException e) {
-      return "this expression contains an unsupported operation";
+      return "UNSUPPORTED OP ERR";
     }
   }
 
@@ -39,78 +166,104 @@ class Basic {
 
   void write() {
     String writtenn="";
-    //////System.out.println(key);
     if (writing) {
       if (key==ENTER || key==RETURN) {
-        //background(55, 219, 189);
-        int lines=1+written.length()/21;
-        // r(20, 52, 450, 45, 5, color(91, 108, 235));
-        r(20, 52, 450, 40*lines, 5, color(91, 108, 235));
-        fill(48, 71, 242);
-        textSize(25);
-        textAlign(LEFT);
-        ans = result();
-        create();
-        /*
-        textSize(25);
-        fill(0, 0, 0);
-        textAlign(LEFT);
-        if (written.length()>20) {
-          for (int i=0; i<written.length(); i++) {
-            if (i>0&&i%21==0) {
-              //System.out.println("2   "+i);
-              writtenn+="\n";
-            }
-            writtenn+=written.charAt(i);
-          }
-          text(writtenn, 30, 80);
-          writtenn="";
-        } else {
-          text(written, 30, 80);
+        if (code == 0) {
+          int lines=1+written.length()/27;
+          r(20, 52, 450, 40*lines, 5, color(185, 191, 235));
+          writtenE = written;
+          ans = result();
         }
-        */
-        text(writtenn, 30, 82);
-        writtenn="";
-        //text(result(), 200, 300);
-        writing=false;
+        if (code == 1) {
+          uBound = evaluate(written);
+        }
+        if ( code == 2) {
+          dBound = evaluate(written);
+        }
+        if (code == 3) {
+          exp = written;
+        }
+        if (code == 4) {
+          exp1 = written;
+        }
+        if (code == 5) {
+          val = evaluate(written);
+        }
+        if (code == 6) {
+          n = (int)(evaluate(written));
+        }
+        create();
       } else {
         if (key==BACKSPACE && written.length()>0) {
           written=written.substring(0, written.length()-1);
         } else if (valid(key) ) {//&& written.length()<16) {
           written+=key;
         }
-        //background(55, 219, 189);
-        int lines=1+written.length()/21;
-        r(20, 52, 450, 40*lines, 5, color(91, 108, 235));
-        fill(48, 71, 242);
-        textSize(22);
-        textAlign(RIGHT);
-        //text("Enter an expression", 230, 35);
-        textSize(25);
-        fill(0, 0, 0);
-        textAlign(LEFT);
-        if (written.length()>20) {
-          for (int i=0; i<written.length(); i++) {
-            if (i>0&&i%21==0) {
-              //System.out.println("2   "+i);
-              writtenn+="\n";
+        if (code==0) {
+          int lines=1+written.length()/27;
+          r(20, 52, 450, 40*lines, 5, color(185, 191, 235));
+          textSize(25);
+          fill(0);
+          textAlign(LEFT);
+
+          if (written.length()>27) {
+            for (int i=0; i<written.length(); i++) {
+              if (i>0&&i%27==0) {
+                //System.out.println("2   "+i);
+                writtenn+="\n";
+              }
+              writtenn+=written.charAt(i);
             }
-            writtenn+=written.charAt(i);
+            text(writtenn, wToWriteX, wToWriteY);
+            writtenn="";
+          } else {
+            text(written, wToWriteX, wToWriteY);
           }
-          text(writtenn, 30, 82);
+          text(writtenn, wToWriteX, wToWriteY);
           writtenn="";
-        } else {
-          text(written, 30, 82);
         }
-        text(writtenn, 30, 82);
-        writtenn="";
-        //////System.out.println("l "+written.substring(written.length()-1));
-      }
-      //////System.out.println(key=='?');
-      //////System.out.println(keyPressed);
-      if (written.length()>0 && written.substring(written.length()-1).equals("?")) {
-        //////System.out.println("now");
-        written=written.substring(0, written.length()-1);
+        if (code == 1) {
+          r(44, 240, 100, 20, 5, color(185, 191, 235));
+          textAlign(LEFT);
+          textSize(16);
+          fill(0);
+          text(written, wToWriteX, wToWriteY);
+        }
+        if (code == 2) {
+          r(44, 300, 100, 20, 5, color(185, 191, 235));
+          textAlign(LEFT);
+          textSize(16);
+          fill(0);
+          text(written, wToWriteX, wToWriteY);
+        }
+        if (code == 3) {
+          r(55, 265, 300, 30, 5, color(185, 191, 235));
+          textAlign(LEFT);
+          textSize(22);
+          fill(0);
+          text(written, wToWriteX+3, wToWriteY+2);
+        }
+        if (code == 4) {
+          r(58, 470, 300, 30, 5, color(185, 191, 235));
+          textAlign(LEFT);
+          fill(0);
+          textSize(22);
+          text(written, wToWriteX, wToWriteY);
+        }
+        if (code == 5) {
+          r(84, 540, 40, 20, 5, color(185, 191, 235));
+          textAlign(LEFT);
+          fill(0);
+          textSize(15);
+          text(written, wToWriteX, wToWriteY);
+        }
+        if (code == 6) {
+          textAlign(LEFT);
+          r(210, 540, 40, 20, 5, color(185, 191, 235));
+          fill(0);
+          textSize(15);
+          text(written, wToWriteX, wToWriteY);
+        }
       }
     }
   }

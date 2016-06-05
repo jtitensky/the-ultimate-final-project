@@ -31,7 +31,7 @@ String eval = "";
 void setup() {
   font = loadFont("try1.vlw");
   textFont(font);
-  noStroke();
+  //noStroke();
 
   point(100, 200);
 
@@ -49,29 +49,21 @@ void setup() {
 
   //2.
   r(250, 150, 100, 40, 10, color(100));
-  dt("Calculus", 250, 163, 100, 100, color(225), 22, CENTER);
+  dt("Statistics", 250, 163, 100, 100, color(225), 22, CENTER);
 
   //3.
   r(250, 200, 100, 40, 10, color(100));
-  dt("Statistics", 250, 213, 100, 100, color(225), 22, CENTER);
+  dt("Graph", 250, 213, 100, 100, color(225), 22, CENTER);
 
   //4.
   r(250, 250, 100, 40, 10, color(100));
-  dt("Graph", 250, 263, 100, 100, color(225), 22, CENTER);
-
-  //5.
-  r(250, 300, 100, 40, 10, color(100));
-  dt("Matrices", 250, 313, 100, 100, color(225), 21, CENTER);
-  //}  
+  dt("Matrices", 250, 263, 100, 100, color(225), 22, CENTER);  
 
   if (state == 'b') {
     b1.create();
   }
   if (state == 'g') {
     g1.create();
-  }
-  if (state=='c') {
-    c1.create();
   }
   if (state=='m') {
     m1.create();
@@ -86,15 +78,10 @@ void draw() {
 }
 
 void mouseClicked() {
-  if (state=='b' && b1.mouseOnBox()) {
-    b1.create();
-    //r(100, 180, 400, 50, 5, color(185, 191, 235));
-    r(20, 52, 450, 40, 5, color(185, 191, 235));
-    writing = true;
-  }
-  if (state=='b'&&!b1.mouseOnBox()) {
-    b1.create();
-    writing=false;
+  if (state=='b'){
+     b1.create();
+     b1.mClick();
+     writing = true;
   }
   if (state == 'g') {
     g1.create();
@@ -113,31 +100,24 @@ void keyReleased() {
 }
 
 
-void thingsHappening() {
-  //if (state!="") { 
+void thingsHappening() { 
   if (mousePressed) {
     int x = mouseX; 
     int y = mouseY;
-    if (x > 250 && x < 350) {
+    if (x > 250 && x < 350 && state == ' ') {
       if (y > 100 && y < 140) {  
         state = 'b'; // "basic"
       }
       if (y > 150 && y < 190) {
-        state = 'c'; //calculus
+        state = 's'; //calculus
       }
       if (y > 200 && y < 240) {
-        state = 's';  //statistics
+        state = 'g';  //statistics
       }
       if (y > 250 && y < 290) {
-        state = 'g'; //graph
-      }
-      if (y > 290 && y < 340) {
-        state = 'm'; //matrices
+        state = 'm'; //graph
       }
     }
-    if (state == 'b' || state == 'c' || state == 's' || state == 'g' || state == 'm') {
-      setup();
-    }
-    //}
   }
+  setup();
 }
