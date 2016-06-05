@@ -15,7 +15,7 @@ class Graph {
   Basic b2 = new Basic();
   double minX = -2.0;
   double maxX = 2.0;
-  double xStep = 0.25;
+  double xStep = 0.01;
   double minY = -2.0; 
   double maxY = 2.0;
   double oMin = -10.0;
@@ -213,7 +213,7 @@ class Graph {
       wToWriteY = 46;
       written[cWritten] = "";
     }
-    if ( mode == 'c' || mode == 'p' && mouseX > 289 && mouseX < 339 && mouseY < 135) {
+    if ( (mode == 'c' || mode == 'p') && mouseX > 289 && mouseX < 339 && mouseY < 135) {
       for (int i = 23; i < 110; i+= 40) {
         if (mouseY > i && mouseY < i+30) {
           r(289, i, 50, 30, 5, color(185, 191, 235));
@@ -353,16 +353,21 @@ class Graph {
             //System.out.println(minn);
             double ans = evalFunc(written[i], df.format(minn));
             double ans1 = evalFunc(written[i], df.format(minn+oStep));
-            //System.out.println(ans+" "+ans1);
+            System.out.println(ans+" "+ans1);
             String exp = ""+df.format(ans)+"*"+"cos("+df.format(minn)+")";
-            //System.out.println(exp);
+            System.out.println(exp);
             String eyp = ""+df.format(ans)+"*"+"sin("+df.format(minn)+")";
+            System.out.println(eyp);
             String exp1 = ""+df.format(ans1)+"*"+"cos("+df.format((minn+oStep))+")";
+            System.out.println(exp1);
             String eyp1 = ""+df.format(ans1)+"*"+"sin("+df.format((minn+oStep))+")";
-            double xp = b2.evaluate(df.format(exp));
-            double yp = b2.evaluate(df.format(eyp));
-            double xp1 = b2.evaluate(df.format(exp1));
-            double yp1 = b2.evaluate(df.format(eyp1));
+            System.out.println(eyp1);
+             //everything up till here is good ;-;
+            double xp = b2.evaluate(exp);
+            System.out.println("boop");
+            double yp = b2.evaluate(eyp);
+            double xp1 = b2.evaluate(exp1);
+            double yp1 = b2.evaluate(eyp1);
 
             double x1, x2, y1, y2;
             x1 = yax + xp*sx;
@@ -398,7 +403,7 @@ class Graph {
             x2 = yax + xp1*sx;
             y1 = xax - yp*sy;
             y2 = xax - yp1*sy; 
-            
+
             System.out.println(x1 + " " + y1);
             //System.out.println("(" + x1 + ", " + y1 + ") -> (" +x2 + ", "+y2+")");
             line((float)(x1), (float)(y1), (float)(x2), (float)(y2)); 
@@ -431,7 +436,7 @@ class Graph {
         g += s.charAt(j);
       }
     }
-    System.out.println(g);
+    //System.out.println(g);
     Basic b2 = new Basic();
     //System.out.println(""+s+","+i+","+b2.evaluate(g)+"");
     return b2.evaluate(g);

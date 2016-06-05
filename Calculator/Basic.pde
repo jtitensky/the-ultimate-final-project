@@ -2,21 +2,23 @@ class Basic {
 
   Basic() {
   }
-
+  String ans = ""; 
   void create() {
     background(55, 219, 189);
     fill(48, 71, 242);
     PFont f = createFont("Comic Sans MS Bold", 48); //HATERS GONNA HATE, BUT COMIC SANS IS LOVE, COMIC SANS IS LIFE, //...
     textFont(f, 48);
-    textSize(45);
-    textAlign(CENTER);
-    text("Enter an expression", 300, 100);
-    r(75, 125, 450, 50, 5, color(91, 108, 235));
+    textSize(25);
+    textAlign(RIGHT);
+    text("Enter an expression:", 260, 35);
+    textAlign(LEFT);
+    text("Ans: "+ans, 350, 37);
+    r(20, 52, 450, 40, 5, color(91, 108, 235));
     written="";
   }
 
   boolean mouseOnBox() {
-    return 75<mouseX && mouseX<450+75 && 125<mouseY && mouseY<175;
+    return 20<mouseX && mouseX<470 && 52<mouseY && mouseY<97;
   }
 
   String result() {
@@ -40,13 +42,16 @@ class Basic {
     //////System.out.println(key);
     if (writing) {
       if (key==ENTER || key==RETURN) {
-        background(55, 219, 189);
+        //background(55, 219, 189);
         int lines=1+written.length()/21;
-        r(75, 125, 450, 50*lines, 5, color(91, 108, 235));
+        // r(20, 52, 450, 45, 5, color(91, 108, 235));
+        r(20, 52, 450, 40*lines, 5, color(91, 108, 235));
         fill(48, 71, 242);
-        textSize(45);
-        textAlign(CENTER);
-        text(result(), 300, 100);
+        textSize(25);
+        textAlign(LEFT);
+        ans = result();
+        create();
+        /*
         textSize(25);
         fill(0, 0, 0);
         textAlign(LEFT);
@@ -58,12 +63,13 @@ class Basic {
             }
             writtenn+=written.charAt(i);
           }
-          text(writtenn, 85, 160);
+          text(writtenn, 30, 80);
           writtenn="";
         } else {
-          text(written, 85, 160);
+          text(written, 30, 80);
         }
-        text(writtenn, 85, 160);
+        */
+        text(writtenn, 30, 82);
         writtenn="";
         //text(result(), 200, 300);
         writing=false;
@@ -73,13 +79,13 @@ class Basic {
         } else if (valid(key) ) {//&& written.length()<16) {
           written+=key;
         }
-        background(55, 219, 189);
+        //background(55, 219, 189);
         int lines=1+written.length()/21;
-        r(75, 125, 450, 50*lines, 5, color(185, 191, 235));
+        r(20, 52, 450, 40*lines, 5, color(91, 108, 235));
         fill(48, 71, 242);
-        textSize(45);
-        textAlign(CENTER);
-        text("Enter an expression", 300, 100);
+        textSize(22);
+        textAlign(RIGHT);
+        //text("Enter an expression", 230, 35);
         textSize(25);
         fill(0, 0, 0);
         textAlign(LEFT);
@@ -91,12 +97,12 @@ class Basic {
             }
             writtenn+=written.charAt(i);
           }
-          text(writtenn, 85, 160);
+          text(writtenn, 30, 82);
           writtenn="";
         } else {
-          text(written, 85, 160);
+          text(written, 30, 82);
         }
-        text(writtenn, 85, 160);
+        text(writtenn, 30, 82);
         writtenn="";
         //////System.out.println("l "+written.substring(written.length()-1));
       }
@@ -116,6 +122,9 @@ class Basic {
     s=s.replace("pi", ""+Math.PI);
     s=s.replace("--", "+");
     s=s.replace("+-", "-");
+    s=s.replace("ans", ans);
+    s=s.replace("ANS", ans);
+    s=s.replace("Ans", ans);
     //////System.out.println(s);
     s=s.replace("*-", "*-1*");
     s=s.replace("/-", "*-1/");
@@ -326,7 +335,7 @@ class Basic {
       throw new IllegalArgumentException();
     }
     if (parts.size()==1) {
-      if(parts.get(0).equals("-0.0")){
+      if (parts.get(0).equals("-0.0")) {
         return 0.0;
       }
       return Double.parseDouble(parts.get(0));
