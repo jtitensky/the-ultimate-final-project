@@ -12,7 +12,7 @@ class Basic {
   int n;
 
   void create() {
-    //System.out.println(c1.integrate(0.0, 2.0, "x", 'x'));
+    System.out.println(c1.integrate(0.0, 2.0, "x", 'x'));
     background(100, 87, 75);
     fill(48, 71, 242);
     PFont f = createFont("Comic Sans MS Bold", 48); //HATERS GONNA HATE, BUT COMIC SANS IS LOVE, COMIC SANS IS LIFE, //...
@@ -373,14 +373,14 @@ class Basic {
       parts.remove(parts.size()-1);
     }
     //broken up
-    System.out.println("1 "+parts);
+    //System.out.println("1 "+parts);
     for (int i=0; i<parts.size()-1; i++) {
       if (parts.get(i).equals("-")&&parts.get(i+1).equals("-")) {
         //parts.set(i, "+");
         //parts.remove(i+1);
         parts.set(i+2, "-"+parts.get(i+2));
         parts.remove(i+1);
-        System.out.println("          "+parts);
+        //System.out.println("          "+parts);
         i--;
       }
       if (parts.get(i).equals("+")&&parts.get(i+1).equals("-")) {
@@ -408,7 +408,7 @@ class Basic {
        }
        */
     }
-    System.out.println(parts);
+    //System.out.println(parts);
     try {
       int i;
       i=parts.indexOf("!");
@@ -452,7 +452,7 @@ class Basic {
           parts.remove(i+1);
           parts.remove(i-2);
           parts.remove(i-2);
-          System.out.println("^ "+parts);
+          //System.out.println("^ "+parts);
         } else {
           x=Math.pow(Double.parseDouble(parts.get(i-1)), Double.parseDouble(parts.get(i+1)));
           parts.set(i, ""+x);
@@ -483,7 +483,7 @@ class Basic {
         if (parts.get(i+1).charAt(1)=='-') {
           parts.set(i+1, parts.get(i+1).substring(2));
         }
-        System.out.println("-- "+parts);
+        //System.out.println("-- "+parts);
         if (parts.get(0).equals("+")) {
           parts.remove(0);
         }

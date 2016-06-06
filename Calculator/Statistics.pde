@@ -90,6 +90,7 @@ public class Statistics {
         text(written, 5+70*col+2, 48+39*row+30);
       }
     }
+    System.out.println("Sfsaf "+entries[1][1]);
   }
 
 

@@ -22,14 +22,16 @@ public class Calculus {
 
 
   double integrate(double a, double b, String e, char d) {
+     DecimalFormat df=new DecimalFormat("#");
+      df.setMaximumFractionDigits(10);
     double s=0;
     double x=0;
     String y="";
-    for (int i=1; i<1000000; i++) {
-      x=a+(b-a)/1000000*i;
+    for (int i=1; i<10000; i++) {
+      x=a+(b-a)/10000*i;
       for (int j=0; j<e.length(); j++) {
         if (e.charAt(j)==d) {
-          y+=x;
+          y+=df.format(x);
         } else {
           y+=e.charAt(j);
         }
@@ -37,7 +39,8 @@ public class Calculus {
       s+=b2.evaluate(y);
       y="";
     }
-    return s*(b-a)/1000000;
+    return s*(b-a)/10000;
+   
   }
 
   double differentiate(char d, String e, double a, int n) {
