@@ -10,6 +10,7 @@ Basic b1= new Basic();
 Calculus c1=new Calculus();
 Graph g1 = new Graph();
 Matricies m1=new Matricies();
+Statistics s1=new Statistics();
 boolean writing=false;
 String written="";
 
@@ -68,6 +69,9 @@ void setup() {
   if (state=='m') {
     m1.create();
   }
+  if (state=='s') {
+    s1.create();
+  }
 }
 
 void draw() {
@@ -78,15 +82,18 @@ void draw() {
 }
 
 void mouseClicked() {
-  if (state=='b'){
-     b1.create();
-     b1.mClick();
-     writing = true;
+  if (state=='b') {
+    b1.create();
+    b1.mClick();
+    writing = true;
   }
   if (state == 'g') {
     g1.create();
     g1.mClick();
     writing = true;
+  }
+  if (state=='s') {
+    s1.mClick();
   }
 }
 
@@ -96,6 +103,9 @@ void keyReleased() {
   }
   if (state=='g') {
     g1.write();
+  }
+  if (state=='s') {
+    s1.write();
   }
 }
 

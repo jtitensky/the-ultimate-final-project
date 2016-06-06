@@ -15,7 +15,7 @@ public class Calculus {
     text("∫", 300, 150);
     r(100, 180, 400, 50, 5, color(91, 108, 235));
     for (int i=1; i<9; i++) {
-      System.out.println("d "+i+differentiate('x', "e^x", 1.0, i));
+      //System.out.println("d "+i+differentiate('x', "e^x", 1.0, i));
     }
   }
 

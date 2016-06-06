@@ -21,6 +21,7 @@ Development Log
 5-28 J: made small numbers not break evaluate when their in scientific notation
 5-29 J: did statistics functions, for 1 and 2 variables
 6-01 J: changed the basic screen to expand textbox and not limit # of characters
+6-05 J: made the input screen for statistics
 
 Project Plan
 

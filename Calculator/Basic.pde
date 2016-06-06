@@ -88,8 +88,8 @@ class Basic {
   }
 
   void mClick() {
-    if(mouseX > 500 && mouseX < 560 && mouseY > 550 && mouseY < 570){
-     state = ' '; 
+    if (mouseX > 500 && mouseX < 560 && mouseY > 550 && mouseY < 570) {
+      state = ' ';
     }
     if (20<mouseX && mouseX<470 && 52<mouseY && mouseY<97) {
       r(20, 52, 450, 40, 5, color(185, 191, 235));
@@ -373,11 +373,14 @@ class Basic {
       parts.remove(parts.size()-1);
     }
     //broken up
-    //System.out.println("1 "+parts);
+    System.out.println("1 "+parts);
     for (int i=0; i<parts.size()-1; i++) {
       if (parts.get(i).equals("-")&&parts.get(i+1).equals("-")) {
-        parts.set(i, "+");
+        //parts.set(i, "+");
+        //parts.remove(i+1);
+        parts.set(i+2, "-"+parts.get(i+2));
         parts.remove(i+1);
+        System.out.println("          "+parts);
         i--;
       }
       if (parts.get(i).equals("+")&&parts.get(i+1).equals("-")) {
@@ -393,17 +396,19 @@ class Basic {
         parts.remove(i);
         i--;
       }  
+      /*
       if (parts.get(i).equals("-")&&47<parts.get(i+1).charAt(0)&&parts.get(i+1).charAt(0)<58) {
-
-        if (i>0&&47<parts.get(i-1).charAt(0)&&parts.get(i-1).charAt(0)<58) {
-          parts.set(i, "+");
-        } else {
-          parts.remove(i);
-        }
-        i--;
-      }
+       
+       if (i>0&&47<parts.get(i-1).charAt(0)&&parts.get(i-1).charAt(0)<58) {
+       parts.set(i, "+");
+       } else {
+       parts.remove(i);
+       }
+       i--;
+       }
+       */
     }
-    //////System.out.println(parts);
+    System.out.println(parts);
     try {
       int i;
       i=parts.indexOf("!");
@@ -437,12 +442,17 @@ class Basic {
       i=parts.indexOf("^");
       while (i!=-1) {
         double x;
-        if (i-2>=0&&parts.get(i-2).equals("-")) {
+        boolean blah=true;
+        if (i-3>=0&&47<parts.get(i-3).charAt(0)&&parts.get(i-3).charAt(0)<58) {
+          blah=false;
+        }
+        if (i-2>=0&&parts.get(i-2).equals("-")&&blah) {
           x=Math.pow(Double.parseDouble(parts.get(i-1))*(-1), Double.parseDouble(parts.get(i+1)));
           parts.set(i, ""+x);
           parts.remove(i+1);
           parts.remove(i-2);
           parts.remove(i-2);
+          System.out.println("^ "+parts);
         } else {
           x=Math.pow(Double.parseDouble(parts.get(i-1)), Double.parseDouble(parts.get(i+1)));
           parts.set(i, ""+x);
@@ -470,6 +480,10 @@ class Basic {
       while (i!=-1) {
         parts.set(i, "+");
         parts.set(i+1, "-"+parts.get(i+1));
+        if (parts.get(i+1).charAt(1)=='-') {
+          parts.set(i+1, parts.get(i+1).substring(2));
+        }
+        System.out.println("-- "+parts);
         if (parts.get(0).equals("+")) {
           parts.remove(0);
         }
