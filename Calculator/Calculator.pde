@@ -95,6 +95,9 @@ void mouseClicked() {
   if (state=='s') {
     s1.mClick();
   }
+  if (state == 'm') {
+    m1.mClick();
+  }
 }
 
 void keyReleased() {
@@ -106,6 +109,9 @@ void keyReleased() {
   }
   if (state=='s') {
     s1.write();
+  }
+  if (state == 'm') {
+    m1.write();
   }
 }
 
