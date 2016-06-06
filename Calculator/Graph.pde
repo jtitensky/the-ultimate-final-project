@@ -13,11 +13,11 @@ class Graph {
   }
 
   Basic b2 = new Basic();
-  double minX = -2.0;
-  double maxX = 2.0;
+  double minX = -10.0;
+  double maxX = 10.0;
   double xStep = 0.01;
-  double minY = -2.0; 
-  double maxY = 2.0;
+  double minY = -10.0; 
+  double maxY = 10.0;
   double oMin = -10.0;
   double oMax = 10.0;
   double oStep = 0.1;
@@ -26,19 +26,19 @@ class Graph {
   int wToWriteX, wToWriteY, cWritten;
 
   void create() {
-    background(55, 219, 189);
+    background(100, 87, 75);
     fill(48, 71, 242);
     PFont f = createFont("Comic Sans MS Bold", 48); //HATERS GONNA HATE, BUT COMIC SANS IS LOVE, COMIC SANS IS LIFE, //...
     textFont(f, 48);
     textSize(22);
     textAlign(CENTER);
-    r(500, 20, 60, 20, 5, color(91, 108, 235));
-    r(500, 45, 60, 30, 5, color(0));
+    r(500, 20, 60, 20, 5, color(234, 162, 102));
+    r(500, 45, 60, 30, 5, color(234, 162, 102));
 
-    r(400, 20, 80, 30, 5, color(91, 108, 235));
-    r(400, 60, 80, 30, 5, color(91, 108, 235));
-    r(400, 100, 80, 30, 5, color(91, 108, 235));
-    fill(237, 159, 12);
+    r(400, 20, 80, 30, 5, color(234, 162, 102));
+    r(400, 60, 80, 30, 5, color(234, 162, 102));
+    r(400, 100, 80, 30, 5, color(234, 162, 102));
+    fill(222, 218, 215);
     text("REC", 440, 44);
     text("POL", 440, 84);
     text("PARA", 440, 124);
@@ -46,6 +46,7 @@ class Graph {
     if (mode == 'r') {
       fill(250, 8, 8);
       for (int j = 203, i = 0; j < 570 && i < 10; j+=40, i++) {
+        fill(222, 218, 215);
         text("y"+i+":", 20, j);
       }
       text("x-min:", 53, 43);
@@ -53,19 +54,20 @@ class Graph {
       text("y-min:", 53, 123);
       text("y-max:", 53, 163);
       text("x-Step:", 244, 47);
-      r(289, 23, 50, 30, 5, color(91, 108, 235));
+      r(289, 23, 50, 30, 5, color(234, 162, 102));
 
       fill(48, 71, 242);
       for (int j = 180; j < 550; j+=40) {
-        r(40, j, 300, 30, 5, color(91, 108, 235));
+        r(40, j, 300, 30, 5, color(234, 162, 102));
       }
       for (int j = 20; j < 150; j+=40) {
-        r(100, j, 50, 30, 5, color(91, 108, 235));
+        r(100, j, 50, 30, 5, color(234, 162, 102));
       }
       for (int i = 180, j = 0; i < 550 && j < 10; i+=40, j++) {
         //System.out.println(written[j]);
         textSize(25);
         textAlign(LEFT);
+        fill(222, 218, 215);
         text(written[j], 350, i+22);
       }
       for (int i = 20, j = 10; i < 150 && j < 14; i+=40, j++) {
@@ -78,6 +80,7 @@ class Graph {
     if (mode == 'c') {
       fill(250, 8, 8);
       for (int j = 203, i = 0; j < 570 && i < 10; j+=40, i++) {
+        fill(222, 218, 215);
         text("r"+i+":", 20, j);
       }
       text("x-min:", 53, 43);
@@ -87,21 +90,22 @@ class Graph {
       text("ø-min:", 244, 47);
       text("ø-max:", 244, 87);
       text("ø-Step:", 244, 127);
-      r(289, 23, 50, 30, 5, color(91, 108, 235));
-      r(289, 63, 50, 30, 5, color(91, 108, 235));
-      r(289, 103, 50, 30, 5, color(91, 108, 235));
+      r(289, 23, 50, 30, 5, color(234, 162, 102));
+      r(289, 63, 50, 30, 5, color(234, 162, 102));
+      r(289, 103, 50, 30, 5, color(234, 162, 102));
 
       fill(48, 71, 242);
       for (int j = 180; j < 550; j+=40) {
-        r(40, j, 300, 30, 5, color(91, 108, 235));
+        r(40, j, 300, 30, 5, color(234, 162, 102));
       }
       for (int j = 20; j < 150; j+=40) {
-        r(100, j, 50, 30, 5, color(91, 108, 235));
+        r(100, j, 50, 30, 5, color(234, 162, 102));
       }
       for (int i = 180, j = 0; i < 550 && j < 10; i+=40, j++) {
         //System.out.println(written[j]);
         textSize(25);
         textAlign(LEFT);
+        fill(222, 218, 215);
         text(written[j], 350, i+22);
       }
       for (int i = 20, j = 10; i < 150 && j < 14; i+=40, j++) {
@@ -116,6 +120,7 @@ class Graph {
     if (mode == 'p') {
       fill(250, 8, 8);
       for (int j = 203, i = 0; j < 570 || i < 5; j+=80, i++) {
+        fill(222, 218, 215);
         text("x"+i+":", 20, j);
         text("y"+i+":", 20, j+40);
       }
@@ -126,21 +131,22 @@ class Graph {
       text("t-min:", 244, 47);
       text("t-max:", 244, 87);
       text("t-Step:", 244, 127);
-      r(289, 23, 50, 30, 5, color(91, 108, 235));
-      r(289, 63, 50, 30, 5, color(91, 108, 235));
-      r(289, 103, 50, 30, 5, color(91, 108, 235));
+      r(289, 23, 50, 30, 5, color(234, 162, 102));
+      r(289, 63, 50, 30, 5, color(234, 162, 102));
+      r(289, 103, 50, 30, 5, color(234, 162, 102));
 
       fill(48, 71, 242);
       for (int j = 180; j < 550; j+=40) {
-        r(40, j, 300, 30, 5, color(91, 108, 235));
+        r(40, j, 300, 30, 5, color(234, 162, 102));
       }
       for (int j = 20; j < 150; j+=40) {
-        r(100, j, 50, 30, 5, color(91, 108, 235));
+        r(100, j, 50, 30, 5, color(234, 162, 102));
       }
       for (int i = 180, j = 0; i < 550 && j < 10; i+=40, j++) {
         //System.out.println(written[j]);
         textSize(25);
         textAlign(LEFT);
+        fill(222, 218, 215);
         text(written[j], 350, i+22);
       }
       for (int i = 20, j = 10; i < 150 && j < 14; i+=40, j++) {
@@ -152,12 +158,11 @@ class Graph {
         text(written[j], 350, i);
       }
     }
-    r(500, 20, 60, 20, 5, color(91, 108, 235));
+    r(500, 20, 60, 20, 5, color(234, 162, 102));
     fill(0);
     textSize(15);
     text("BACK", 510, 36);
     textSize(15);
-    fill(232, 213, 37);
     text("GRAPH", 505, 66);
   }
 
@@ -316,7 +321,7 @@ class Graph {
         oStep = b2.evaluate(written[16]);
       }
     }
-    background(55, 219, 189);
+    background(100, 87, 75);
     double sy = 600/(maxY-minY);
     double sx = 600/(maxX-minX);
     double yax = Math.abs((minX*sx));
@@ -329,7 +334,7 @@ class Graph {
       for (int i = 0; i < written.length; i++) {
         if (!written[i].equals("")) {
           //System.out.println(written[i]);
-          fill(20*i);
+          stroke(255-10*i,30*i,120+20*i);
           double minn = minX;
           while (minn < maxX) { 
             //try {
@@ -358,7 +363,7 @@ class Graph {
       for (int i = 0; i < written.length; i++) {
         if (!written[i].equals("")) {
           //System.out.println(written[i]);
-          fill(20*i);
+          stroke(20+20*i);
           double minn = oMin;
           while (minn < oMax) { 
             //try {
@@ -400,7 +405,7 @@ class Graph {
       for (int i = 0; i < written.length; i+=2) {
         if (!written[i].equals("")&&!written[i+1].equals("")) {
           //System.out.println(written[i]);
-          fill(0);
+          stroke(20+20*i);
           double minn = oMin;
           while (minn < oMax) { 
             //try {
@@ -426,6 +431,7 @@ class Graph {
         }
       }
     }
+    stroke(255,255,255);
     r(0, (float)(xax), 600, 0, 10, color(0));
     r((float)(yax), 0, 0, 600, 10, color(0));
   }
@@ -438,6 +444,7 @@ class Graph {
     DecimalFormat df=new DecimalFormat("#");
     df.setMaximumFractionDigits(10);
     String g = "";
+    s = s.replace("-","-1*");
     for (int j = 0; j < s.length(); j++) {
       if (s.charAt(j) == 'x') {
         if (j > 0 && Character.isDigit(s.charAt(j-1))) {

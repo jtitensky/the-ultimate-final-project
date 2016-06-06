@@ -12,7 +12,7 @@ class Basic {
   int n;
 
   void create() {
-    System.out.println(c1.integrate(0.0, 2.0, "x", 'x'));
+    //System.out.println(c1.integrate(0.0, 2.0, "x", 'x'));
     background(100, 87, 75);
     fill(48, 71, 242);
     PFont f = createFont("Comic Sans MS Bold", 48); //HATERS GONNA HATE, BUT COMIC SANS IS LOVE, COMIC SANS IS LIFE, //...
