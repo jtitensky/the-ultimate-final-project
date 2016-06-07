@@ -10,6 +10,8 @@ class Basic {
   String exp = "";
   String exp1 = "";
   int n;
+  boolean radian;
+  ;
 
   void create() {
     //System.out.println(c1.integrate(0.0, 2.0, "x", 'x'));
@@ -85,9 +87,39 @@ class Basic {
     fill(0);
     textSize(15);
     text("BACK", 510, 566);
+
+    fill(255, 255, 255);
+    textSize(13);
+    text("radians", 500, 70);
+    text("degrees", 500, 90);
+    fill(234, 162, 102);
+    ellipse(485, 65, 15, 15);
+    ellipse(485, 85, 15, 15);
+    fill(0, 0, 0);
+    if (radian) {
+      ellipse(485, 65, 10, 10);
+    } else {
+      ellipse(485, 85, 10, 10);
+    }
   }
 
   void mClick() {
+    if (485-8<mouseX&&mouseX<485+8) {
+      if (65-8<mouseY&&mouseY<65+8) {
+        radian=true;
+        fill(234, 162, 102);
+        ellipse(485, 85, 15, 15);
+        fill(0, 0, 0);
+        ellipse(485, 65, 10, 10);
+      }
+      if (85-8<mouseY&&mouseY<85+8) {
+        radian=false;
+        fill(234, 162, 102);
+        ellipse(485, 65, 15, 15);
+        fill(0, 0, 0);
+        ellipse(485, 85, 10, 10);
+      }
+    }
     if (mouseX > 500 && mouseX < 560 && mouseY > 550 && mouseY < 570) {
       state = ' ';
     }
@@ -192,7 +224,9 @@ class Basic {
         if (code == 6) {
           n = (int)(evaluate(written));
         }
+        System.out.println("R"+radian);
         create();
+        System.out.println("r"+radian);
       } else {
         if (key==BACKSPACE && written.length()>0) {
           written=written.substring(0, written.length()-1);
@@ -284,7 +318,6 @@ class Basic {
     //////System.out.println(s);
     s=s.replace("e", ""+Math.E);
     s=s.replace("pi", ""+Math.PI);
-    boolean radian=true;
     while (s.contains("arcsin")) {
       s=evalF(s, "arcsin", radian);
     }
