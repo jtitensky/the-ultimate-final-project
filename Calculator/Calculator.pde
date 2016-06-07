@@ -139,6 +139,7 @@ void thingsHappening() {
       }
       if (y > 350 && y < 390) {
         state = 'g';  //statistics
+        strokeWeight(1.5);
       }
       if (y > 450 && y < 490) {
         state = 'm'; //graph

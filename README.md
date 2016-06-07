@@ -16,7 +16,7 @@ Amateur Graphing-Calculator that contains these features:
 Development Log
 ~~~~~~~~~~~~~~~
 5-15 H: created Calculator and menu-like thing
-5-15 J: wrote evaluate function (for infix notation, handles (),!,%,*,/,+,-)
+5-15 J: wrote evaluate function (for infix notation, handles (),!,%,^,*,/,+,-)
 5-16 H: implement evaluate function and now "basic" property works :)\
 5-22 J: made the input thingy for basic and wrote definite integral and derivative functions
 5-23 H: created input for graph, created graph funtion for normal y= functions (major bug/problem with properly getting input - screwey and unusable input at times when operations are used), implemented the very basics for graphing
@@ -34,6 +34,7 @@ Development Log
 6-04 H: worked on matrices screen/user input for matrices...
 6-05 J: made the input screen for statistics
 6-06 H: updates calculator screen to be final and have description of features
+6-06 J: made option to switch between radians and degrees in basic and finished the input screen for stats
 
 Project Plan
 - hierarchy of needs for this to be worthy of being called project:

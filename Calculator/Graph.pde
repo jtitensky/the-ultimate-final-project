@@ -175,6 +175,7 @@ class Graph {
         ging = false;
         create();
       } else {
+        strokeWeight(0);
         state = ' ';
       }
     }

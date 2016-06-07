@@ -60,6 +60,7 @@ public class Statistics {
     text("X", 35, 40);
     text("Y", 100, 40);
     textAlign(LEFT);
+    fill(0);
     for (int i=0; i<15; i++) {
       for (int j=0; j<2; j++) {
         if (entries[i][j]!=Integer.MAX_VALUE) {
@@ -165,7 +166,8 @@ public class Statistics {
       if (48+39*y<mouseY&&mouseY<48+39+39*y) {
         for (int x=0; x<2; x++) {
           if (5+70*x<mouseX&&mouseX<5+70+70*x) {
-            fill(163, 217, 182);
+            create();
+            fill(185, 191, 235);
             rect(5+70*x, 48+39*y, 70, 39);
             col=x;
             row=y;
@@ -198,9 +200,10 @@ public class Statistics {
         if (written.length()>0) {
           entries[row][col]=Double.parseDouble(written);
         }
-        fill(147, 227, 93);
+        fill(100, 87, 75);
         rect(5+70*col, 48+39*row, 70, 39);
-        fill(34, 119, 240);
+        //fill(34, 119, 240);
+        fill(0);
         text(written, 10+70*col+2, 48+39*row+30);
         written="";
       }
@@ -209,7 +212,8 @@ public class Statistics {
           written=written.substring(0, written.length()-1);
           fill(222, 218, 215);
           rect(5+70*col, 48+39*row, 70, 39);
-          fill(34, 119, 240);
+          //fill(34, 119, 240);
+          fill(0);
           text(written, 10+70*col+2, 48+39*row+30);
         }
       }
@@ -217,7 +221,8 @@ public class Statistics {
         written+=key;
         fill(222, 218, 215);
         rect(5+70*col, 48+39*row, 70, 39);
-        fill(34, 119, 240);
+        //fill(34, 119, 240);
+        fill(0);
         text(written, 10+70*col+2, 48+39*row+30);
       }
     }
@@ -310,8 +315,8 @@ public class Statistics {
         q[1]=dd.get(0);
         q[3]=dd.get(1);
       } else {
-        q[1]=median(dd, 0, dd.size()/2);
-        q[3]=median(dd, dd.size()/2+1, dd.size()-1);
+        q[1]=median(dd, 0, dd.size()/2-1);
+        q[3]=median(dd, dd.size()/2, dd.size()-1);
       }
     } else {
       if (dd.size()==1) {
