@@ -1,4 +1,4 @@
-# the-ultimate-final-project \n
+# the-ultimate-final-project
 
 Team Name
 ~~~~~~~~~
@@ -36,7 +36,10 @@ Development Log
 6-06 H: updates calculator screen to be final and have description of features
 
 Project Plan
-
+- hierarchy of needs for this to be worthy of being called project:
+   - being to properly take and parse through user input
+   - evaluate expression properly (getting that function down)
+   - using processing to graph various relationships / getting the drawing to work properly
 ~~~~~~~~~~~~
 
 Links To Demo Versions
