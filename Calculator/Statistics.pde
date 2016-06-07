@@ -8,15 +8,32 @@ public class Statistics {
   int col;
   int row;
   boolean writing;
+  boolean x;
+  boolean y;
 
   Statistics() {
     data1=new ArrayList<Double>();
     data2=new ArrayList<Double>();
     entries=new double[15][2];
+    for (int i=0; i<15; i++) {
+      for (int j=0; j<2; j++) {
+        entries[i][j]=(double)(Integer.MAX_VALUE);
+      }
+    }
     written="";
     writing=false;
   }
 
+  void print(double[][] a) {
+    String s="";
+    for (int i=0; i<a.length; i++) {
+      for (int j=0; j<a[0].length; j++) {
+        s+=" "+a[i][j];
+      }
+      System.out.println(s);
+      s="";
+    }
+  }
 
   void create() {
     background(147, 227, 93);
@@ -37,13 +54,72 @@ public class Statistics {
     textAlign(LEFT);
     for (int i=0; i<15; i++) {
       for (int j=0; j<2; j++) {
-        text(""+entries[i][j], 5+70*j+2, 48+39*i+30);
+        if (entries[i][j]!=Integer.MAX_VALUE) {
+          text(""+entries[i][j], 5+70*j+2, 48+39*i+30);
+        }
+      }
+    }
+    fill(34, 119, 240);
+    rect(175, 30, 160, 30, 5);
+    rect(400, 30, 160, 30, 5);
+    fill(255);
+    textSize(20);
+    text("X-Stats", 220, 55);
+    text("Y-Stats", 440, 55);
+
+    if (x) {
+      go();
+      if (data1.size()>0) {
+        String s="";
+        fill(0);
+        textAlign(LEFT);
+        textSize(17);
+        double[] q=quartiles(data1);
+        s+="mean "+mean(data1)+"\n";
+        s+="min "+q[0]+"\n";
+        s+="first quatile "+q[1]+"\n";
+        s+="median "+q[2]+"\n";
+        s+="third quartile "+q[3]+"\n";
+        s+="max "+q[4]+"\n";
+        if (mode(data1).size()>0) {
+          s+="mode "+mode(data1)+"\n";
+        } else {
+          s+="mode NaN\n";
+        }
+        s+="range "+range(data1)+"\n";
+        s+="sample stan dev "+"\n   "+sampleSD(data1)+"\n";
+        s+="population stan dev "+"\n   "+populationSD(data1)+"\n";
+        text(s, 170, 100);
+      }
+    }
+    if (y) {
+      go();
+      if (data2.size()>0) {
+        String s="";
+        fill(0);
+        textAlign(LEFT);
+        textSize(17);
+        double[] q=quartiles(data2);
+        s+="mean "+mean(data2)+"\n";
+        s+="min "+q[0]+"\n";
+        s+="first quatile "+q[1]+"\n";
+        s+="median "+q[2]+"\n";
+        s+="third quartile "+q[3]+"\n";
+        s+="max "+q[4]+"\n";
+        if (mode(data2).size()>0) {
+          s+="mode "+mode(data2)+"\n";
+        } else {
+          s+="mode NaN\n";
+        }
+        s+="range "+range(data2)+"\n";
+        s+="sample stan dev "+"\n   "+sampleSD(data2)+"\n";
+        s+="population stan dev "+"\n   "+populationSD(data2)+"\n";
+        text(s, 400, 100);
       }
     }
   }
 
   void mClick() {
-    System.out.println(mouseX+"   "+mouseY);
     for (int y=0; y<15; y++) {
       if (48+39*y<mouseY&&mouseY<48+39+39*y) {
         for (int x=0; x<2; x++) {
@@ -56,6 +132,15 @@ public class Statistics {
           }
         }
       }
+    }
+
+    if (175<mouseX&&mouseX<175+160&&30<mouseY&&mouseY<30+30) {
+      x=true;
+      create();
+    }
+    if (400<mouseX&&mouseX<400+160&&30<mouseY&&mouseY<30+30) {
+      y=true;
+      create();
     }
   }
 
@@ -93,6 +178,20 @@ public class Statistics {
     System.out.println("Sfsaf "+entries[1][1]);
   }
 
+  void go() {
+    data1=new ArrayList<Double>();
+    for (int i=0; i<15; i++) {
+      if (entries[i][0]!=Integer.MAX_VALUE) {
+        data1.add(entries[i][0]);
+      }
+    }
+    data2=new ArrayList<Double>();
+    for (int i=0; i<15; i++) {
+      if (entries[i][1]!=Integer.MAX_VALUE) {
+        data2.add(entries[i][1]);
+      }
+    }
+  }
 
 
 
@@ -104,6 +203,54 @@ public class Statistics {
     }
   }
 
+  double range(ArrayList<Double> d) {
+    double min=d.get(0);
+    double max=d.get(0);
+    for (int i=0; i<d.size(); i++) {
+      if (d.get(i)<min) {
+        min=d.get(i);
+      }
+      if (d.get(i)>max) {
+        max=d.get(i);
+      }
+    }
+    return max-min;
+  }
+
+  ArrayList<Double> mode(ArrayList<Double> d) {
+    int bc=1;
+    ArrayList<Double> b=new ArrayList<Double>();
+    for (int i=0; i<d.size(); i++) {
+      int m=0;
+      for (int j=0; j<d.size(); j++) {
+        System.out.println("i"+i+"j"+j);
+        if (d.get(i).equals(d.get(j))) {
+          System.out.println(d);
+          m++;
+        }
+        System.out.println("m"+m);
+      }
+      if (m>bc) {
+        bc=m;
+      }
+    }
+    System.out.println("bc "+bc);
+    for (int i=0; i<d.size(); i++) {
+      int m=0;
+      for (int j=0; j<d.size(); j++) {
+        if (d.get(i).equals(d.get(j))) {
+          m++;
+        }
+      }
+      if (m==bc&&m!=1&&b.indexOf(d.get(i))==-1) {
+        b.add(d.get(i));
+      }
+    }
+    return b;
+  }
+
+
+
   double[] quartiles(ArrayList<Double> d) {
     ArrayList<Double> dd= new ArrayList<Double>();
     for (int i=0; i<d.size(); i++) {
@@ -111,13 +258,23 @@ public class Statistics {
     }
     Collections.sort(dd);
     double[] q=new double[5];
-    q[0]=dd.get(1);
+    q[0]=dd.get(0);
     if (dd.size()%2==0) {
-      q[1]=median(dd, 0, dd.size()/2);
-      q[3]=median(dd, dd.size()/2+1, dd.size()-1);
+      if (dd.size()==2) {
+        q[1]=dd.get(0);
+        q[3]=dd.get(1);
+      } else {
+        q[1]=median(dd, 0, dd.size()/2);
+        q[3]=median(dd, dd.size()/2+1, dd.size()-1);
+      }
     } else {
-      q[1]=median(dd, 0, dd.size()/2-1);
-      q[3]=median(dd, dd.size()/2+1, dd.size()-1);
+      if (dd.size()==1) {
+        q[1]=dd.get(0);
+        q[3]=dd.get(0);
+      } else {
+        q[1]=median(dd, 0, dd.size()/2-1);
+        q[3]=median(dd, dd.size()/2+1, dd.size()-1);
+      }
     }
     q[2]=median(dd, 0, dd.size()-1);
     q[4]=dd.get(dd.size()-1);
