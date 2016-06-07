@@ -10,6 +10,7 @@ public class Statistics {
   boolean writing;
   boolean x;
   boolean y;
+  boolean z;
 
   Statistics() {
     data1=new ArrayList<Double>();
@@ -22,6 +23,7 @@ public class Statistics {
     }
     written="";
     writing=false;
+    x=y=z=false;
   }
 
   void print(double[][] a) {
@@ -62,10 +64,12 @@ public class Statistics {
     fill(34, 119, 240);
     rect(175, 30, 160, 30, 5);
     rect(400, 30, 160, 30, 5);
+    rect(275, 330, 165, 30, 5);
     fill(255);
     textSize(20);
     text("X-Stats", 220, 55);
     text("Y-Stats", 440, 55);
+    text("Linear Regression", 280, 355);
 
     if (x) {
       go();
@@ -75,20 +79,20 @@ public class Statistics {
         textAlign(LEFT);
         textSize(17);
         double[] q=quartiles(data1);
-        s+="mean "+mean(data1)+"\n";
-        s+="min "+q[0]+"\n";
-        s+="first quatile "+q[1]+"\n";
-        s+="median "+q[2]+"\n";
-        s+="third quartile "+q[3]+"\n";
-        s+="max "+q[4]+"\n";
+        s+="mean: "+mean(data1)+"\n";
+        s+="min: "+q[0]+"\n";
+        s+="first quatile: "+q[1]+"\n";
+        s+="median: "+q[2]+"\n";
+        s+="third quartile: "+q[3]+"\n";
+        s+="max: "+q[4]+"\n";
         if (mode(data1).size()>0) {
-          s+="mode "+mode(data1)+"\n";
+          s+="mode: "+mode(data1)+"\n";
         } else {
-          s+="mode NaN\n";
+          s+="mode: NaN\n";
         }
-        s+="range "+range(data1)+"\n";
-        s+="sample stan dev "+"\n   "+sampleSD(data1)+"\n";
-        s+="population stan dev "+"\n   "+populationSD(data1)+"\n";
+        s+="range: "+range(data1)+"\n";
+        s+="sample stan dev: "+"\n   "+sampleSD(data1)+"\n";
+        s+="population stan dev: "+"\n   "+populationSD(data1)+"\n";
         text(s, 170, 100);
       }
     }
@@ -100,21 +104,48 @@ public class Statistics {
         textAlign(LEFT);
         textSize(17);
         double[] q=quartiles(data2);
-        s+="mean "+mean(data2)+"\n";
-        s+="min "+q[0]+"\n";
-        s+="first quatile "+q[1]+"\n";
-        s+="median "+q[2]+"\n";
-        s+="third quartile "+q[3]+"\n";
-        s+="max "+q[4]+"\n";
+        s+="mean: "+mean(data2)+"\n";
+        s+="min: "+q[0]+"\n";
+        s+="first quatile: "+q[1]+"\n";
+        s+="median: "+q[2]+"\n";
+        s+="third quartile: "+q[3]+"\n";
+        s+="max: "+q[4]+"\n";
         if (mode(data2).size()>0) {
-          s+="mode "+mode(data2)+"\n";
+          s+="mode: "+mode(data2)+"\n";
         } else {
-          s+="mode NaN\n";
+          s+="mode: NaN\n";
         }
-        s+="range "+range(data2)+"\n";
-        s+="sample stan dev "+"\n   "+sampleSD(data2)+"\n";
-        s+="population stan dev "+"\n   "+populationSD(data2)+"\n";
+        s+="range: "+range(data2)+"\n";
+        s+="sample stan dev: "+"\n   "+sampleSD(data2)+"\n";
+        s+="population stan dev: "+"\n   "+populationSD(data2)+"\n";
         text(s, 400, 100);
+      }
+    }
+    if (z) {
+      go();
+      if (data1.size()>0&&data2.size()>0) {
+        boolean t=true;
+        for (int i=0; i<15; i++) {
+          if ((entries[i][0]==Integer.MAX_VALUE&&entries[i][1]!=Integer.MAX_VALUE)||(entries[i][0]!=Integer.MAX_VALUE&&entries[i][1]==Integer.MAX_VALUE)) {
+            t=false;
+          }
+        }
+        if (t) {
+          double[] x=linearRegression(data1, data2);
+          String s="";
+          s+="best fit line: y="+x[0]+"*x+"+x[1]+"\n";
+          s+="correlation coefficient: "+x[2]+"\n";
+          s+="coefficient of determination: "+x[3];
+          fill(0);
+          textAlign(CENTER);
+          textSize(18);
+          text(s, 350, 400);
+        } else {
+          fill(0);
+          textAlign(CENTER);
+          textSize(18);
+          text("enter corresponding values for x & y", 350, 400);
+        }
       }
     }
   }
@@ -140,6 +171,10 @@ public class Statistics {
     }
     if (400<mouseX&&mouseX<400+160&&30<mouseY&&mouseY<30+30) {
       y=true;
+      create();
+    }
+    if (275<mouseX&&mouseX<275+165&&330<mouseY&&mouseY<330+30) {
+      z=true;
       create();
     }
   }

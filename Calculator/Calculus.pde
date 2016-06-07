@@ -22,8 +22,8 @@ public class Calculus {
 
 
   double integrate(double a, double b, String e, char d) {
-     DecimalFormat df=new DecimalFormat("#");
-      df.setMaximumFractionDigits(10);
+    DecimalFormat df=new DecimalFormat("#");
+    df.setMaximumFractionDigits(10);
     double s=0;
     double x=0;
     String y="";
@@ -40,7 +40,6 @@ public class Calculus {
       y="";
     }
     return s*(b-a)/10000;
-   
   }
 
   double differentiate(char d, String e, double a, int n) {

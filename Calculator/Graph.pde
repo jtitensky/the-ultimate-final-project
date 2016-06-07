@@ -334,7 +334,7 @@ class Graph {
       for (int i = 0; i < written.length; i++) {
         if (!written[i].equals("")) {
           //System.out.println(written[i]);
-          stroke(255-10*i,30*i,120+20*i);
+          stroke(255-10*i, 30*i, 120+20*i);
           double minn = minX;
           while (minn < maxX) { 
             //try {
@@ -431,7 +431,7 @@ class Graph {
         }
       }
     }
-    stroke(255,255,255);
+    stroke(255, 255, 255);
     r(0, (float)(xax), 600, 0, 10, color(0));
     r((float)(yax), 0, 0, 600, 10, color(0));
   }
@@ -444,7 +444,7 @@ class Graph {
     DecimalFormat df=new DecimalFormat("#");
     df.setMaximumFractionDigits(10);
     String g = "";
-    s = s.replace("-","-1*");
+    s = s.replace("-", "-1*");
     for (int j = 0; j < s.length(); j++) {
       if (s.charAt(j) == 'x') {
         if (j > 0 && Character.isDigit(s.charAt(j-1))) {
