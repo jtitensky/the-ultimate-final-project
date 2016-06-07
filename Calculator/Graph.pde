@@ -12,6 +12,7 @@ class Graph {
     }
   }
 
+  boolean ging = false;
   Basic b2 = new Basic();
   double minX = -10.0;
   double maxX = 10.0;
@@ -170,11 +171,18 @@ class Graph {
     //System.out.println(evalFunc("2x", "-2.0")); 
     if (mouseX>500&&mouseX<560&&mouseY>20&&mouseY<40) {
       //System.out.println("boiii");
-      state = ' ';
+      if (ging) {
+        ging = false;
+        create();
+      } else {
+        state = ' ';
+      }
     }
     if (mouseX>500&&mouseX<560&&mouseY>45&&mouseY<75) {
       //r(500, 45, 60, 30, 5, color(0));
       //mode = 'g';
+      b2.setRad();
+      ging = true;
       graphh();
     }
     if (mouseX>400&&mouseX<480&&mouseY>20&&mouseY<50) {
@@ -192,7 +200,6 @@ class Graph {
       clearS();
       create();
     }
-    //if (!(mode=='g')) {
     if (mouseX > 40 && mouseX < 340 && mouseY > 170) {
       for (int x = 180; x < 570; x+=40) {
         if (mouseY > x && mouseY < x+40) {
@@ -434,6 +441,11 @@ class Graph {
     stroke(255, 255, 255);
     r(0, (float)(xax), 600, 0, 10, color(0));
     r((float)(yax), 0, 0, 600, 10, color(0));
+    r(500, 20, 60, 20, 5, color(234, 162, 102));
+    stroke(0);
+    fill(0);
+    textSize(15);
+    text("BACK", 510, 36);
   }
 
   boolean op(char f) {
@@ -458,6 +470,7 @@ class Graph {
     }
     //System.out.println(g);
     Basic b2 = new Basic();
+    b2.setRad();
     //System.out.println(""+s+","+i+","+b2.evaluate(g)+"");
     return b2.evaluate(g);
   }

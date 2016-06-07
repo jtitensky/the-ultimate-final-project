@@ -11,7 +11,10 @@ class Basic {
   String exp1 = "";
   int n;
   boolean radian;
-  ;
+
+  void setRad() {
+    radian = true;
+  }
 
   void create() {
     //System.out.println(c1.integrate(0.0, 2.0, "x", 'x'));
@@ -200,29 +203,33 @@ class Basic {
     String writtenn="";
     if (writing) {
       if (key==ENTER || key==RETURN) {
-        if (code == 0) {
-          int lines=1+written.length()/27;
-          r(20, 52, 450, 40*lines, 5, color(185, 191, 235));
-          writtenE = written;
-          ans = result();
+        try {
+          if (code == 0) {
+            int lines=1+written.length()/27;
+            r(20, 52, 450, 40*lines, 5, color(185, 191, 235));
+            writtenE = written;
+            ans = result();
+          }
+          if (code == 1) {
+            uBound = evaluate(written);
+          }
+          if ( code == 2) {
+            dBound = evaluate(written);
+          }
+          if (code == 3) {
+            exp = written;
+          }
+          if (code == 4) {
+            exp1 = written;
+          }
+          if (code == 5) {
+            val = evaluate(written);
+          }
+          if (code == 6) {
+            n = (int)(evaluate(written));
+          }
         }
-        if (code == 1) {
-          uBound = evaluate(written);
-        }
-        if ( code == 2) {
-          dBound = evaluate(written);
-        }
-        if (code == 3) {
-          exp = written;
-        }
-        if (code == 4) {
-          exp1 = written;
-        }
-        if (code == 5) {
-          val = evaluate(written);
-        }
-        if (code == 6) {
-          n = (int)(evaluate(written));
+        catch(ArrayIndexOutOfBoundsException e) {
         }
         System.out.println("R"+radian);
         create();
