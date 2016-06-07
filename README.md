@@ -6,6 +6,12 @@ Hussica
 
 Project Name / Description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+Amateur Graphing-Calculator that contains these features:
+- evaluating an expression
+- finding definite integrals + value of function @ some derivative
+- graphing x-y function, polars, and parametrics
+- basic matrix operations (multiplication, addition, finding transpose, finding discriminant)
+- simple two variable statistics (mean, mode, regression, etc.)
 
 Development Log
 ~~~~~~~~~~~~~~~
