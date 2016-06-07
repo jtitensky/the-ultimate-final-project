@@ -427,6 +427,11 @@ class Basic {
         parts.remove(i);
         i--;
       }      
+      if (parts.get(i).equals("^")&&parts.get(i+1).equals("-")) {
+        parts.set(i+2,"-"+parts.get(i+2));;
+        parts.remove(i+1);
+        i--;
+      }  
       if (parts.get(i).equals("*")&&parts.get(i+1).equals("-")) {
         parts.remove(i+1);
         parts.set(i+1, "-"+parts.get(i+1));

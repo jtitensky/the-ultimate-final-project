@@ -20,7 +20,7 @@ Development Log
 5-16 H: implement evaluate function and now "basic" property works :)\
 5-22 J: made the input thingy for basic and wrote definite integral and derivative functions
 5-23 H: created input for graph, created graph funtion for normal y= functions (major bug/problem with properly getting input - screwey and unusable input at times when operations are used), implemented the very basics for graphing
-5-23 J: fixed a small thing in evaluate, and also made it work for e, pi, (arc)sin, (arc)cos, (arc)tan, log, ln, and abs
+5-23 J: fixed a small thing in evaluate, and also made it work for e, pi, (arc)sin, (arc)cos, (arc)tan, log, ln, and abs (the input for any of these functions has to be in ())
 5-24 J: fixed stuff in evaluate for hopefully the last time
 5-25 J: made differentiate be for nth derivatives, and started matrix functions
 5-25 H: fully implemented regualr x-y function graphing + giving option of adjusting axis + steps
@@ -37,11 +37,12 @@ Development Log
 6-06 J: made option to switch between radians and degrees in basic and finished the input screen for stats
 
 Project Plan
+~~~~~~~~~~~~
 - hierarchy of needs for this to be worthy of being called project:
    - being to properly take and parse through user input
    - evaluate expression properly (getting that function down)
    - using processing to graph various relationships / getting the drawing to work properly
-~~~~~~~~~~~~
 
 Links To Demo Versions
 ~~~~~~~~~~~~~~~~~~~~~~
+https://github.com/jtitensky/the-ultimate-final-project.git
