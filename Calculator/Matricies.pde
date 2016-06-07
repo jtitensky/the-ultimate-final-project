@@ -35,6 +35,7 @@ public class Matricies {
   char sm = 's';
 
   void create() {
+    //add(m1,m2);
     background(100, 87, 75);
     PFont f = createFont("Comic Sans MS Bold", 48); //HATERS GONNA HATE, BUT COMIC SANS IS LOVE, COMIC SANS IS LIFE, //...
     textFont(f, 48);
@@ -49,6 +50,8 @@ public class Matricies {
     text("T", 398, 574);
     text("* +", 455, 574);
     text("BACK", 519, 574);
+
+    ////////////////////////////////////////////
     if (sm == 's') {
       textSize(30);
       fill(222, 218, 215);
@@ -59,6 +62,8 @@ public class Matricies {
       text("X", 140, 40);
       text("[", 10, 74);
       text("[", 10, 369);
+      text("]", 33+70*r1, 45+(40)*c1-9);
+      text("]", 33+70*r2, 346+(40)*c2-13);
       try {
         text("D: "+determinant(m1), 225, 40);
       }
@@ -75,9 +80,8 @@ public class Matricies {
       r(170, 13, 40, 30, 5, color(234, 162, 102));
       r(90, 308, 40, 30, 5, color(234, 162, 102));
       r(170, 308, 40, 30, 5, color(234, 162, 102));
-      fill(222, 218, 215);
-      textAlign(LEFT);
       textSize(25);
+      fill(0);
       text(r1+"", 102, 38);
       text(c1+"", 182, 38);
       text(r2+"", 102, 333);
@@ -88,6 +92,7 @@ public class Matricies {
           fill(222, 218, 215);
           textAlign(LEFT);
           textSize(18);
+          fill(0);
           text(m1[i][j]+"", 37+(70)*i, 72+(40)*j);
         }
       }
@@ -97,14 +102,14 @@ public class Matricies {
           fill(222, 218, 215);
           textAlign(LEFT);
           textSize(18);
+          fill(0);
           text(m2[i][j]+"", 37+(70)*i, 369+(40)*j);
         }
       }
-      fill(222, 218, 215);
-      textSize(30);
-      text("]", 33+70*r1, 45+(40)*c1-9);
-      text("]", 33+70*r2, 346+(40)*c2-13);
     }
+    ////////////////////////////////////////////
+
+    ////////////////////////////////////////////
     if (sm == 't') {
       textSize(30);
       fill(222, 218, 215);
@@ -115,12 +120,13 @@ public class Matricies {
       text("[", 10, 369);
       text("]", 33+70*c1, 45+(40)*r1-9);
       text("]", 33+70*c2, 346+(40)*r2-13);
-      for (int i = 0; i < c2; i++) {
+      for (int i = 0; i < c1; i++) {
         for (int j = 0; j < r1; j++) {
           r(33+(70)*i, 49+(40)*j, 60, 30, 5, color(234, 162, 102));
           fill(222, 218, 215);
           textAlign(LEFT);
           textSize(18);
+          fill(0);
           text(m1[j][i]+"", 37+(70)*i, 72+(40)*j);
         }
       }
@@ -130,15 +136,71 @@ public class Matricies {
           fill(222, 218, 215);
           textAlign(LEFT);
           textSize(18);
+          fill(0);
           text(m2[j][i]+"", 37+(70)*i, 369+(40)*j);
         }
       }
     }
+    ////////////////////////////////////////////
+
+    ////////////////////////////////////////////
+    if (sm=='o') {
+      textSize(30);
+      fill(222, 218, 215);
+      textAlign(LEFT);
+      try {
+        double[][] sM = add(m1, m2);
+        text("M1 + M2", 30, 40);
+        text("[", 10, 74);
+        text("]", 33+70*sM.length, 45+(40)*sM[0].length-9);
+        for (int i = 0; i < sM.length; i++) {
+          for (int j = 0; j < sM[0].length; j++) {
+            r(33+(70)*i, 49+(40)*j, 60, 30, 5, color(234, 162, 102));
+            fill(222, 218, 215);
+            textAlign(LEFT);
+            textSize(18);
+            fill(0);
+            text(sM[i][j]+"", 37+(70)*i, 72+(40)*j);
+          }
+        }
+      }
+      catch(IllegalArgumentException e) {
+        text("UN-ADD-ABLE", 30, 40);
+      }
+      try {
+        double[][] mM = multiply(m1, m2);
+        textSize(30);
+        fill(222, 218, 215);
+        textAlign(LEFT);
+        text("M1 * M2", 30, 335);
+        text("[", 10, 369);
+        text("]", 33+70*mM.length, 342+(40)*mM[0].length-9);
+        for (int i = 0; i < mM.length; i++) {
+          for (int j = 0; j < mM[0].length; j++) {
+            r(33+(70)*i, 346+(40)*j, 60, 30, 5, color(234, 162, 102));
+            fill(222, 218, 215);
+            textAlign(LEFT);
+            textSize(18);
+            fill(0);
+            text(mM[i][j]+"", 37+(70)*i, 369+(40)*j);
+          }
+        }
+      }
+      catch(IllegalArgumentException e) {
+        text("UN-MULTIPLY-ABLE", 30, 335);
+      }
+    }
+    ///////////////////////////////////////////////
   }
 
   void mClick() {
     if (mouseX>515 && mouseX<585 && mouseY>550 && mouseY<580) {
       state = ' ';
+    }
+    // r(435, 550, 70, 30, 5, color(234, 162, 102));
+    if (mouseX>435 && mouseX<505 && mouseY>550 && mouseY<580) {
+      sm = 'o';
+      create();
     }
     if (mouseX>335 && mouseX<375 && mouseY>550 && mouseY<580) {
       sm = 's';
@@ -183,28 +245,28 @@ public class Matricies {
       if (mouseX>90 && mouseX<130 && mouseY>13 && mouseY<43) {
         create();
         r(90, 13, 40, 30, 5, color(185, 191, 235));
-        wToWriteX = 119;
+        wToWriteX = 110;
         wToWriteY = 38;
         wsb = 0;
       }
       if (mouseX>170 && mouseX<210 && mouseY>13 && mouseY<43) {
         create();
         r(170, 13, 40, 30, 5, color(185, 191, 235));
-        wToWriteX = 199;
+        wToWriteX = 190;
         wToWriteY = 38;
         wsb = 1;
       }
       if (mouseX>90 && mouseX<130 && mouseY>308 && mouseY<338) {
         create();
         r(90, 308, 40, 30, 5, color(185, 191, 235));
-        wToWriteX = 119;
+        wToWriteX = 110;
         wToWriteY = 333;
         wsb = 2;
       }
       if (mouseX>170 && mouseX<210 && mouseY>308 && mouseY<338) {
         create();
         r(170, 308, 40, 30, 5, color(185, 191, 235));
-        wToWriteX = 199;
+        wToWriteX = 190;
         wToWriteY = 333;
         wsb = 3;
       }
@@ -226,36 +288,41 @@ public class Matricies {
     textAlign(LEFT);
     if (writing) {
       if (key==ENTER || key==RETURN) {
-        if (wR!=-1 && wC!=-1) {
-          if (wM==0) {
-            m1[wR][wC] = b2.evaluate(written);
-          } else {
-            m2[wR][wC] = b2.evaluate(written);
+        try {
+          if (wR!=-1 && wC!=-1) {
+            if (wM==0) {
+              m1[wR][wC] = b2.evaluate(written);
+            } else {
+              m2[wR][wC] = b2.evaluate(written);
+            }
+            wR = -1;
+            wC = -1;
+            wM = -1;
           }
-          wR = -1;
-          wC = -1;
-          wM = -1;
+          if (wsb ==0) {
+            r1 = (int)b2.evaluate(written);
+            clearS();
+            wsb = -100;
+          }
+          if (wsb == 1) {
+            c1 =(int)b2.evaluate(written);
+            clearS();
+            wsb = -100;
+          }
+          if (wsb == 2) {
+            r2 =(int)b2.evaluate(written);
+            clearS();
+            wsb = -100;
+          }
+          if (wsb == 3) {
+            c2 =(int)b2.evaluate(written);
+            clearS();
+            wsb = -100;
+          }
         }
-        if (wsb ==0) {
-          r1 = (int)b2.evaluate(written);
-          clearS();
-          wsb = -100;
+        catch(ArrayIndexOutOfBoundsException e) {
         }
-        if (wsb == 1) {
-          c1 =(int)b2.evaluate(written);
-          clearS();
-          wsb = -100;
-        }
-        if (wsb == 2) {
-          r2 =(int)b2.evaluate(written);
-          clearS();
-          wsb = -100;
-        }
-        if (wsb == 3) {
-          c2 =(int)b2.evaluate(written);
-          clearS();
-          wsb = -100;
-        }
+        writing = false;
         written = "";
         create();
       } else {
@@ -289,7 +356,7 @@ public class Matricies {
         if (wsb == 3) {
           r(170, 308, 40, 30, 5, color(185, 191, 235));
         }
-        textSize(18);
+        textSize(22);
         fill(0);
         text(written, wToWriteX-13, wToWriteY);
       }
@@ -301,9 +368,15 @@ public class Matricies {
     if (a.length!=b.length || a[0].length!=b[0].length) {
       throw new IllegalArgumentException();
     }
-    double[][] c=new double[a.length][a[0].length];
+    double[][] c= new double[a.length][a[0].length];
+    /*
+    System.out.println(a.length + " " + a[0].length);
+     System.out.println(b.length + " " + b[0].length);
+     System.out.println(c.length + " " + c[0].length);
+     System.out.println(a[0][0] + " " + b[0][0]);
+     */
     for (int i=0; i<c.length; i++) {
-      for (int j=0; i<c[0].length; j++) {
+      for (int j=0; j<c[0].length; j++) {
         c[i][j]=a[i][j]+b[i][j];
       }
     }

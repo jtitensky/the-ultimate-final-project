@@ -96,7 +96,9 @@ void mouseClicked() {
     s1.mClick();
   }
   if (state == 'm') {
+    m1.create();
     m1.mClick();
+    writing = true;
   }
 }
 
