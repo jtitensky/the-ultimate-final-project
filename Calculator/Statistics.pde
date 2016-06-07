@@ -11,6 +11,7 @@ public class Statistics {
   boolean x;
   boolean y;
   boolean z;
+  boolean gingp;
 
   Statistics() {
     data1=new ArrayList<Double>();
@@ -38,8 +39,13 @@ public class Statistics {
   }
 
   void create() {
-    background(147, 227, 93);
-    stroke(34, 119, 240);
+    background(100, 87, 75);
+    r(540, 570, 50, 20, 5, color(235, 162, 102));
+    fill(0);
+    textSize(15);
+    textAlign(LEFT);
+    text("BACK", 544, 585);
+    stroke(234, 162, 102);
     strokeWeight(4);
     line(5, 5, 5, 595);
     line(145, 5, 145, 595);
@@ -50,32 +56,32 @@ public class Statistics {
     for (int i=0; i<15; i++) {
       line(5, 48+39*i, 145, 48+39*i);
     }
-    fill(34, 119, 240);
-    text("X", 40, 40);
-    text("Y", 110, 40);
+    fill(222, 218, 215);
+    text("X", 35, 40);
+    text("Y", 100, 40);
     textAlign(LEFT);
     for (int i=0; i<15; i++) {
       for (int j=0; j<2; j++) {
         if (entries[i][j]!=Integer.MAX_VALUE) {
-          text(""+entries[i][j], 5+70*j+2, 48+39*i+30);
+          text(""+entries[i][j], 10+70*j+2, 48+39*i+30);
         }
       }
     }
-    fill(34, 119, 240);
+    fill(234, 162, 102);
     rect(175, 30, 160, 30, 5);
     rect(400, 30, 160, 30, 5);
-    rect(275, 330, 165, 30, 5);
-    fill(255);
+    rect(275, 340, 165, 30, 5);
     textSize(20);
+    fill(0);
     text("X-Stats", 220, 55);
     text("Y-Stats", 440, 55);
-    text("Linear Regression", 280, 355);
+    text("Linear Regression", 280, 365);
 
     if (x) {
       go();
       if (data1.size()>0) {
         String s="";
-        fill(0);
+        fill(222, 218, 215);
         textAlign(LEFT);
         textSize(17);
         double[] q=quartiles(data1);
@@ -100,7 +106,7 @@ public class Statistics {
       go();
       if (data2.size()>0) {
         String s="";
-        fill(0);
+        fill(222, 218, 215);
         textAlign(LEFT);
         textSize(17);
         double[] q=quartiles(data2);
@@ -133,10 +139,10 @@ public class Statistics {
         if (t) {
           double[] x=linearRegression(data1, data2);
           String s="";
-          s+="best fit line: y="+x[0]+"*x+"+x[1]+"\n";
+          s+="y="+x[0]+"x+"+x[1]+"\n";
           s+="correlation coefficient: "+x[2]+"\n";
           s+="coefficient of determination: "+x[3];
-          fill(0);
+          fill(222, 218, 215);
           textAlign(CENTER);
           textSize(18);
           text(s, 350, 400);
@@ -151,6 +157,10 @@ public class Statistics {
   }
 
   void mClick() {
+    //if(    r(540, 570, 50, 20, 5, color(235, 162,102));
+    if (mouseX>540 && mouseX < 590 && mouseY>570 && mouseY< 590) {
+      state = ' ';
+    }
     for (int y=0; y<15; y++) {
       if (48+39*y<mouseY&&mouseY<48+39+39*y) {
         for (int x=0; x<2; x++) {
@@ -177,6 +187,7 @@ public class Statistics {
       z=true;
       create();
     }
+    written = "";
   }
 
   void write() {
@@ -190,24 +201,24 @@ public class Statistics {
         fill(147, 227, 93);
         rect(5+70*col, 48+39*row, 70, 39);
         fill(34, 119, 240);
-        text(written, 5+70*col+2, 48+39*row+30);
+        text(written, 10+70*col+2, 48+39*row+30);
         written="";
       }
       if (key==BACKSPACE) {
         if (written.length()>0) {
           written=written.substring(0, written.length()-1);
-          fill(163, 217, 182);
+          fill(222, 218, 215);
           rect(5+70*col, 48+39*row, 70, 39);
           fill(34, 119, 240);
-          text(written, 5+70*col+2, 48+39*row+30);
+          text(written, 10+70*col+2, 48+39*row+30);
         }
       }
       if (key=='0'||key=='1'||key=='2'||key=='3'||key=='4'||key=='5'||key=='6'||key=='7'||key=='8'||key=='9'||key=='.') {
         written+=key;
-        fill(163, 217, 182);
+        fill(222, 218, 215);
         rect(5+70*col, 48+39*row, 70, 39);
         fill(34, 119, 240);
-        text(written, 5+70*col+2, 48+39*row+30);
+        text(written, 10+70*col+2, 48+39*row+30);
       }
     }
     System.out.println("Sfsaf "+entries[1][1]);
