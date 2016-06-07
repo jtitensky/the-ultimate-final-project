@@ -23,11 +23,17 @@ Development Log
 5-23 J: fixed a small thing in evaluate, and also made it work for e, pi, (arc)sin, (arc)cos, (arc)tan, log, ln, and abs
 5-24 J: fixed stuff in evaluate for hopefully the last time
 5-25 J: made differentiate be for nth derivatives, and started matrix functions
+5-25 H: fully implemented regualr x-y function graphing + giving option of adjusting axis + steps
 5-26 J: fixed graph input problem and did more matrix functions
 5-28 J: made small numbers not break evaluate when their in scientific notation
+5-28 H: worked on graphing screen and made polar stuff
 5-29 J: did statistics functions, for 1 and 2 variables
+6-01 H: expanded graph to parametrics
 6-01 J: changed the basic screen to expand textbox and not limit # of characters
+6-02 H: merged basic + calc screen + created option for using ans in expression
+6-04 H: worked on matrices screen/user input for matrices...
 6-05 J: made the input screen for statistics
+6-06 H: updates calculator screen to be final and have description of features
 
 Project Plan
 
